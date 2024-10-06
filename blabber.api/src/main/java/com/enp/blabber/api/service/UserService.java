@@ -17,7 +17,14 @@ package com.enp.blabber.api.service;
 
 import org.springframework.stereotype.Service;
 
+import com.enp.blabber.api.dto.UserDto;
+
 @Service
 public class UserService {
+
+	public UserDto createUser(UserDto userDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
