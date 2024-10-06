@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "dbo_blabs")
@@ -26,11 +27,11 @@ public class Blab {
 	@Column(name="id_blab", unique=true, nullable=false)
     private Long id;
     
-    @Column(nullable = false, length = 280)
+    @Column(nullable = false, length = 350)
     private String content;  // El contenido del Blab (limite a 280 caracteres)
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "id_user", nullable = false)
     private User user;  // Usuario que publicó el Blab
 
     @OneToMany(mappedBy = "blab", cascade = CascadeType.ALL, orphanRemoval = true)
