@@ -44,18 +44,6 @@ public class User {
 	
 	@Column(name="name")
     private String name;
-	
-	public User() {
-		
-	}
-
-	public User(String username, String password, String role, String name) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.role = role;
-		this.name = name;
-	}
 
 	public Long getId() {
 		return id;

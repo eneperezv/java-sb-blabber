@@ -41,7 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/api/v1/blabber")
 public class AuthController {
 	
-private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
 	@Autowired
     private AuthenticationManager authenticationManager;
