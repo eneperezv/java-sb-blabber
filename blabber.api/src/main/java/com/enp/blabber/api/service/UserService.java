@@ -39,6 +39,10 @@ public class UserService {
 		return buildDto(userRepository.findById(id));
 	}
 	
+	public UserDto updateUser(UserDto userDto) {
+		return buildDto(Optional.of(userRepository.save(buildEntity(userDto))));
+	}
+	
 	public User buildEntity(UserDto userDto) {
 		User user = new User();
 		user.setId(userDto.getId());
