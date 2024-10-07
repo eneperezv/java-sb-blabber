@@ -15,14 +15,43 @@ package com.enp.blabber.api.service;
  * @since 1.0
  */
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.enp.blabber.api.dto.UserDto;
+import com.enp.blabber.api.model.User;
+import com.enp.blabber.api.repository.UserRepository;
 
 @Service
 public class UserService {
+	
+	@Autowired
+	UserRepository userRepository;
 
 	public UserDto createUser(UserDto userDto) {
+		User user = new User();
+		user.setId(null);
+		user.setUsername(userDto.getUsername());
+		user.setPassword(userDto.getPassword());
+		user.setRole(userDto.getRole());
+		user.setName(userDto.getName());
+		
+		return buildDto(userRepository.save(user));
+	}
+	
+	public UserDto buildDto(User user) {
+		UserDto userDto = new UserDto();
+		userDto.setId(user.getId());
+		userDto.setUsername(user.getUsername());
+		userDto.setPassword(user.getPassword());
+		userDto.setRole(user.getRole());
+		userDto.setName(user.getName());
+		
+		return userDto;
+	}
+
+	public UserDto findUserById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
