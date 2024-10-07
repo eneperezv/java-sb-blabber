@@ -15,6 +15,13 @@ package com.enp.blabber.api.service;
  * @since 1.0
  */
 
+import com.enp.blabber.api.dto.BlabDto;
+
 public class BlabService {
+
+	public BlabDto findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
