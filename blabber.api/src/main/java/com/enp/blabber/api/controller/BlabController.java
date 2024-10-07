@@ -15,6 +15,11 @@ package com.enp.blabber.api.controller;
  * @since 1.0
  */
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/blabber/blabs")
 public class BlabController {
 
 }
