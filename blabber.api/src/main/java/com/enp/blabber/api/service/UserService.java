@@ -1,7 +1,5 @@
 package com.enp.blabber.api.service;
 
-import java.util.Optional;
-
 /*
  * @(#)UserService.java 1.0 5/09/2024
  * 
@@ -16,6 +14,8 @@ import java.util.Optional;
  * @version 1.0
  * @since 1.0
  */
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
