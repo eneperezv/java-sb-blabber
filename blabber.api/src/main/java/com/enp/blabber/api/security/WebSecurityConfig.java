@@ -59,11 +59,11 @@ public class WebSecurityConfig {
                     //registry.requestMatchers("/swagger-ui/**").permitAll();
                     //registry.requestMatchers("/v3/api-docs/**").permitAll();
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/auth").permitAll();
-                    /*
                     //USER
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/reservite/user/**").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.POST, "/api/v1/reservite/user").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.PUT,  "/api/v1/reservite/user").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/users/**").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/users/register").hasRole("USER");
+                    //registry.requestMatchers(HttpMethod.PUT,  "/api/v1/blabber/users").hasRole("USER");
+                    /*
                     //CLIENT
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/reservite/client").hasRole("USER");
                     registry.requestMatchers(HttpMethod.GET,  "/api/v1/reservite/client/by-nombre/**").hasRole("USER");

@@ -59,8 +59,14 @@ public class UserController {
 		UserDto userDto;
 		try {
 			userDto = userService.findById(id);
+			if(userDto == null) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Usuario <"+userDto+"> no existe");
+				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<UserDto>(userDto, HttpStatus.CREATED);
 		}catch(Exception e) {
-			
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
