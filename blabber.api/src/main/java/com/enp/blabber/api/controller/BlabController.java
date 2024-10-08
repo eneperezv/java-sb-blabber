@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.model.ErrorDetails;
+import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
 
 @RestController
@@ -94,9 +95,11 @@ public class BlabController {
 	public ResponseEntity<?> deleteBlab(@PathVariable Long id){
 		try {
 			blabService.deleteBlab(id);
-			ResponseDetails res = new ResponseDetails("OK",new Date());
+			ResponseDetails res = new ResponseDetails("OK",new Date(),HttpStatus.OK.toString(),"Deleted",null);
+			return new ResponseEntity<ResponseDetails>(res,HttpStatus.OK);
 		}catch(Exception e) {
-			
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			ResponseDetails res = new ResponseDetails("ERROR",new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"Deleted",err);
 		}
 	}
 
