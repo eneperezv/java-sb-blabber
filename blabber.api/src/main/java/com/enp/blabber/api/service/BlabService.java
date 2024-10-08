@@ -1,7 +1,5 @@
 package com.enp.blabber.api.service;
 
-import java.util.Optional;
-
 /*
  * @(#)BlabService.java 1.0 6/09/2024
  * 
@@ -17,14 +15,29 @@ import java.util.Optional;
  * @since 1.0
  */
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.Blab;
 import com.enp.blabber.api.model.User;
+import com.enp.blabber.api.repository.BlabRepository;
 
+@Service
 public class BlabService {
+	
+	@Autowired
+	private BlabRepository blabRepository;
 
 	public BlabDto findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BlabDto createBlab(BlabDto blabDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
