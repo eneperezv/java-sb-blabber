@@ -92,7 +92,12 @@ public class BlabController {
 	
 	@DeleteMapping("/delete")
 	public ResponseEntity<?> deleteBlab(@PathVariable Long id){
-		
+		try {
+			blabService.deleteBlab(id);
+			ResponseDetails res = new ResponseDetails("OK",new Date());
+		}catch(Exception e) {
+			
+		}
 	}
 
 }
