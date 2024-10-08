@@ -15,6 +15,10 @@ package com.enp.blabber.api.repository;
  * @since 1.0
  */
 
-public class BlabRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.enp.blabber.api.model.Blab;
+
+public interface BlabRepository extends JpaRepository<Blab,Long> {
 
 }

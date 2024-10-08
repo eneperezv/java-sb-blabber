@@ -4,15 +4,15 @@ import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
 
-public class ResponseDetails {
+public class ResponseDetails<T> {
 	
 	private String status;
 	private Date timestamp;
 	private String code;
 	private String message;
-	private ResponseEntity<?> response;
+	private ResponseEntity<T> response;
 	
-	public ResponseDetails(String status, Date timestamp, String code, String message, ResponseEntity<?> response) {
+	public ResponseDetails(String status, Date timestamp, String code, String message, ResponseEntity<T> response) {
 		super();
 		this.status = status;
 		this.timestamp = timestamp;
@@ -53,11 +53,11 @@ public class ResponseDetails {
 		this.message = message;
 	}
 
-	public ResponseEntity<?> getResponse() {
+	public ResponseEntity<T> getResponse() {
 		return response;
 	}
 
-	public void setResponse(ResponseEntity<?> response) {
+	public void setResponse(ResponseEntity<T> response) {
 		this.response = response;
 	}
 

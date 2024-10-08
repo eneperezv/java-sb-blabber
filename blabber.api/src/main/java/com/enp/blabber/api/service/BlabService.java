@@ -48,27 +48,34 @@ public class BlabService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void deleteBlab(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public Blab buildEntity(BlabDto blabDto) {
-		User user = new User();
+		/*User user = new User();
 		user.setId(userDto.getId());
 		user.setUsername(userDto.getUsername());
 		user.setPassword(userDto.getPassword());
 		user.setRole(userDto.getRole());
 		user.setName(userDto.getName());
 		
-		return user;
+		return user;*/
+		return null;
 	}
 	
 	public BlabDto buildDto(Optional<Blab> optional) {
-		UserDto userDto = new UserDto();
+		/*UserDto userDto = new UserDto();
 		userDto.setId(optional.get().getId());
 		userDto.setUsername(optional.get().getUsername());
 		userDto.setPassword(optional.get().getPassword());
 		userDto.setRole(optional.get().getRole());
 		userDto.setName(optional.get().getName());
 		
-		return userDto;
+		return userDto;*/
+		return null;
 	}
 
 }

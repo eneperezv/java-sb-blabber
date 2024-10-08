@@ -92,14 +92,15 @@ public class BlabController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> deleteBlab(@PathVariable Long id){
+	public ResponseDetails<?> deleteBlab(@PathVariable Long id){
 		try {
 			blabService.deleteBlab(id);
-			ResponseDetails res = new ResponseDetails("OK",new Date(),HttpStatus.OK.toString(),"Deleted",null);
-			return new ResponseEntity<ResponseDetails>(res,HttpStatus.OK);
+			ResponseDetails<String> res = new ResponseDetails<String>("OK",new Date(),HttpStatus.OK.toString(),"Deleted",new ResponseEntity<String>("Blab Deleted", HttpStatus.OK));
+			return res;
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			ResponseDetails res = new ResponseDetails("ERROR",new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"Deleted",err);
+			ResponseDetails<ErrorDetails> resErr = new ResponseDetails<ErrorDetails>("ERROR",new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"Deleted",new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+			return resErr;
 		}
 	}
 
