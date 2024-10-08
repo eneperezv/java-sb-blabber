@@ -1,5 +1,7 @@
 package com.enp.blabber.api.service;
 
+import java.util.List;
+
 /*
  * @(#)BlabService.java 1.0 6/09/2024
  * 
@@ -38,6 +40,11 @@ public class BlabService {
 	}
 
 	public BlabDto createBlab(BlabDto blabDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<BlabDto> getBlabsByUser(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

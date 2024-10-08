@@ -1,5 +1,7 @@
 package com.enp.blabber.api.controller;
 
+import java.util.ArrayList;
+
 /*
  * @(#)BlabController.java 1.0 6/09/2024
  * 
@@ -16,6 +18,7 @@ package com.enp.blabber.api.controller;
  */
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +51,22 @@ public class BlabController {
 				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<BlabDto>(blabDto, HttpStatus.CREATED);
+		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<?> getBlabsByUser(@PathVariable Long id){
+		List<BlabDto> lista = new ArrayList<BlabDto>();
+		try {
+			blabService.getBlabsByUser(id).forEach(lista::add);
+			if(lista.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"NO CONTENT");
+				return new ResponseEntity<>(err,HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(lista, HttpStatus.OK);
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
 			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
