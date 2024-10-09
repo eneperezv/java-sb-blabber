@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
+import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
@@ -76,18 +77,18 @@ public class BlabController {
 	}
 	
 	@PostMapping("/post")
-	public ResponseEntity<?> postBlab(@RequestBody BlabDto blabDto){
+	public ResponseDetails<?> postBlab(@RequestBody BlabDto blabDto){
 		BlabDto savedBlabDto;
 		try{
 			savedBlabDto = blabService.createBlab(blabDto);
 			if(savedBlabDto == null) {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab <"+savedBlabDto+"> not saved");
-				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
-			return new ResponseEntity<BlabDto>(savedBlabDto, HttpStatus.CREATED);
+			return new ResponseDetails<BlabDto>("OK",new Date(),new ResponseEntity<BlabDto>(savedBlabDto, HttpStatus.OK));
 		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
 	
@@ -95,12 +96,10 @@ public class BlabController {
 	public ResponseDetails<?> deleteBlab(@PathVariable Long id){
 		try {
 			blabService.deleteBlab(id);
-			ResponseDetails<String> res = new ResponseDetails<String>("OK",new Date(),HttpStatus.OK.toString(),"Deleted",new ResponseEntity<String>("Blab Deleted", HttpStatus.OK));
-			return res;
+			return new ResponseDetails<String>("OK",new Date(),new ResponseEntity<String>("Blab Deleted", HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			ResponseDetails<ErrorDetails> resErr = new ResponseDetails<ErrorDetails>("ERROR",new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"Deleted",new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
-			return resErr;
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
 
