@@ -41,18 +41,21 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<?> createUser(@RequestBody UserDto userDto){
+	public ResponseDetails<?> createUser(@RequestBody UserDto userDto){
 		UserDto savedUserDto;
 		try{
 			savedUserDto = userService.createUser(userDto);
 			if(savedUserDto == null) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Usuario <"+savedUserDto+"> no existe");
-				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+savedUserDto+"> not found");
+				ResponseDetails<String> res = new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
+				return res;
 			}
-			return new ResponseEntity<UserDto>(savedUserDto, HttpStatus.CREATED);
+			ResponseDetails<UserDto> res = new ResponseDetails<UserDto>("OK",new Date(),new ResponseEntity<UserDto>(savedUserDto, HttpStatus.OK));
+			return res;
 		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+			ResponseDetails<ErrorDetails> resErr = new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+			return resErr;
 		}
 	}
 	
@@ -63,14 +66,14 @@ public class UserController {
 			userDto = userService.findById(id);
 			if(userDto == null) {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+userDto+"> not found");
-				ResponseDetails<String> res = new ResponseDetails<String>("ERROR",new Date(),HttpStatus.NOT_FOUND.toString(),"NOT_FOUND",new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
+				ResponseDetails<String> res = new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 				return res;
 			}
-			ResponseDetails<UserDto> res = new ResponseDetails<UserDto>("OK",new Date(),HttpStatus.OK.toString(),"OK",new ResponseEntity<UserDto>(userDto, HttpStatus.OK));
+			ResponseDetails<UserDto> res = new ResponseDetails<UserDto>("OK",new Date(),new ResponseEntity<UserDto>(userDto, HttpStatus.OK));
 			return res;
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			ResponseDetails<ErrorDetails> resErr = new ResponseDetails<ErrorDetails>("ERROR",new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"Deleted",new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+			ResponseDetails<ErrorDetails> resErr = new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 			return resErr;
 		}
 	}
@@ -82,12 +85,12 @@ public class UserController {
 		try {
 			searchedUserDto = userService.findById(userDto.getId());
 			if(searchedUserDto == null) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Usuario <"+userDto+"> no existe");
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+userDto+"> not found");
 				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
 			}
 			savedUserDto = userService.updateUser(userDto);
 			if(savedUserDto == null) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Usuario <"+savedUserDto+"> no actualizado");
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+savedUserDto+"> not updated");
 				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<UserDto>(savedUserDto, HttpStatus.CREATED);

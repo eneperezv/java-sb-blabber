@@ -8,16 +8,12 @@ public class ResponseDetails<T> {
 	
 	private String status;
 	private Date timestamp;
-	private String code;
-	private String message;
 	private ResponseEntity<T> response;
 	
-	public ResponseDetails(String status, Date timestamp, String code, String message, ResponseEntity<T> response) {
+	public ResponseDetails(String status, Date timestamp, ResponseEntity<T> response) {
 		super();
 		this.status = status;
 		this.timestamp = timestamp;
-		this.code = code;
-		this.message = message;
 		this.response = response;
 	}
 
@@ -37,22 +33,6 @@ public class ResponseDetails<T> {
 		this.timestamp = timestamp;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
 	public ResponseEntity<T> getResponse() {
 		return response;
 	}
@@ -63,8 +43,7 @@ public class ResponseDetails<T> {
 
 	@Override
 	public String toString() {
-		return "ResponseDetails [status=" + status + ", timestamp=" + timestamp + ", code=" + code + ", message="
-				+ message + ", response=" + response + "]";
+		return "ResponseDetails [status=" + status + ", timestamp=" + timestamp + ", response=" + response + "]";
 	}
 
 }
