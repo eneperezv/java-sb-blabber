@@ -45,34 +45,34 @@ public class BlabController {
 	private BlabService blabService;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getBlab(@PathVariable Long id){
+	public ResponseDetails<?> getBlab(@PathVariable Long id){
 		BlabDto blabDto;
 		try {
 			blabDto = blabService.findById(id);
 			if(blabDto == null) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab <"+blabDto+"> not found");
-				return new ResponseEntity<ErrorDetails>(err,HttpStatus.NOT_FOUND);
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blabs not found");
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
-			return new ResponseEntity<BlabDto>(blabDto, HttpStatus.CREATED);
+			return new ResponseDetails<BlabDto>("OK",new Date(),new ResponseEntity<BlabDto>(blabDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
 	
 	@GetMapping("/user/{userId}")
-	public ResponseEntity<?> getBlabsByUser(@PathVariable Long id){
+	public ResponseDetails<?> getBlabsByUser(@PathVariable Long id){
 		List<BlabDto> lista = new ArrayList<BlabDto>();
 		try {
 			blabService.getBlabsByUser(id).forEach(lista::add);
 			if(lista.isEmpty()) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"NO CONTENT");
-				return new ResponseEntity<>(err,HttpStatus.NO_CONTENT);
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blabs not found");
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
-			return new ResponseEntity<>(lista, HttpStatus.OK);
+			return new ResponseDetails<List<BlabDto>>("OK",new Date(),new ResponseEntity<List<BlabDto>>(lista, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
-			return new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
 	
