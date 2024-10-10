@@ -68,15 +68,16 @@ public class BlabService {
 	}
 	
 	public BlabDto buildDto(Optional<Blab> optional) {
-		/*UserDto userDto = new UserDto();
-		userDto.setId(optional.get().getId());
-		userDto.setUsername(optional.get().getUsername());
-		userDto.setPassword(optional.get().getPassword());
-		userDto.setRole(optional.get().getRole());
-		userDto.setName(optional.get().getName());
+		BlabDto blabDto = new BlabDto();
+		blabDto.setId(optional.get().getId());
+		blabDto.setContent(optional.get().getContent());
+		blabDto.setUser(optional.get().getUser());
+		blabDto.setComments(optional.get().getComments());
+		blabDto.setLikes(optional.get().getLikes());
+		blabDto.setCreatedAt(optional.get().getCreatedAt());
+		blabDto.setUpdatedAt(optional.get().getUpdatedAt());
 		
-		return userDto;*/
-		return null;
+		return blabDto;
 	}
 
 }
