@@ -1,7 +1,5 @@
 package com.enp.blabber.api.service;
 
-import java.util.List;
-
 /*
  * @(#)BlabService.java 1.0 6/09/2024
  * 
@@ -16,6 +14,8 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
+
+import java.util.List;
 
 import java.util.Optional;
 
