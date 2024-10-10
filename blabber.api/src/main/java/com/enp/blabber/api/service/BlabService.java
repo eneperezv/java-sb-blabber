@@ -55,15 +55,16 @@ public class BlabService {
 	}
 	
 	public Blab buildEntity(BlabDto blabDto) {
-		/*User user = new User();
-		user.setId(userDto.getId());
-		user.setUsername(userDto.getUsername());
-		user.setPassword(userDto.getPassword());
-		user.setRole(userDto.getRole());
-		user.setName(userDto.getName());
-		
-		return user;*/
-		return null;
+		Blab blab = new Blab();
+		blab.setId(blabDto.getId());
+		blab.setContent(blabDto.getContent());
+		blab.setUser(blabDto.getUser());
+		blab.setComments(blabDto.getComments());
+		blab.setLikes(blabDto.getLikes());
+		blab.setCreatedAt(blabDto.getCreatedAt());
+		blab.setUpdatedAt(blabDto.getUpdatedAt());
+
+		return blab;
 	}
 	
 	public BlabDto buildDto(Optional<Blab> optional) {
