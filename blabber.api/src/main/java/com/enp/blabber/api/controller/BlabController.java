@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.CommentDto;
+import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.model.Comment;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
@@ -132,6 +133,60 @@ public class BlabController {
 				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
 			return new ResponseDetails<List<CommentDto>>("OK",new Date(),new ResponseEntity<List<CommentDto>>(lista, HttpStatus.OK));
+		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@DeleteMapping("/comments/{id}")
+	public ResponseDetails<?> deleteBlabComment(@PathVariable Long id){
+		try {
+			blabService.deleteBlabComment(id);
+			return new ResponseDetails<String>("OK",new Date(),new ResponseEntity<String>("Blab Comment Deleted", HttpStatus.OK));
+		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@PostMapping("/comments")
+	public ResponseDetails<?> postBlabLikes(@RequestBody LikeDto likeDto){
+		LikeDto savedLikeDto;
+		try {
+			savedLikeDto = blabService.createBlabLike(likeDto);
+			if(savedLikeDto == null) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab Comment <"+savedLikeDto+"> not saved");
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<LikeDto>("OK",new Date(),new ResponseEntity<LikeDto>(savedLikeDto, HttpStatus.OK));
+		}catch(Exception e){
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@GetMapping("/{id}/comments")
+	public ResponseDetails<?> getBlabComments(@PathVariable Long id){
+		List<CommentDto> lista = new ArrayList<CommentDto>();
+		try {
+			blabService.getBlabComments(id).forEach(lista::add);
+			if(lista.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blabs not found");
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<List<CommentDto>>("OK",new Date(),new ResponseEntity<List<CommentDto>>(lista, HttpStatus.OK));
+		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@DeleteMapping("/comments/{id}")
+	public ResponseDetails<?> deleteBlabComment(@PathVariable Long id){
+		try {
+			blabService.deleteBlabComment(id);
+			return new ResponseDetails<String>("OK",new Date(),new ResponseEntity<String>("Blab Comment Deleted", HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
