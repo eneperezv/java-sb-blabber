@@ -67,6 +67,21 @@ public class BlabService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public LikeDto createBlabLike(LikeDto likeDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<LikeDto> getBlabLikes(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteBlabLike(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public Blab buildEntity(BlabDto blabDto) {
 		Blab blab = new Blab();
@@ -92,11 +107,6 @@ public class BlabService {
 		blabDto.setUpdatedAt(optional.get().getUpdatedAt());
 		
 		return blabDto;
-	}
-
-	public LikeDto createBlabLike(LikeDto likeDto) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

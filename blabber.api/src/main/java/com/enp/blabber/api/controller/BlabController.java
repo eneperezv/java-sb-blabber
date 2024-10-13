@@ -81,7 +81,7 @@ public class BlabController {
 	}
 	
 	@PostMapping("/post")
-	public ResponseDetails<?> postBlab(@RequestBody BlabDto blabDto){
+	public ResponseDetails<?> createBlab(@RequestBody BlabDto blabDto){
 		BlabDto savedBlabDto;
 		try{
 			savedBlabDto = blabService.createBlab(blabDto);
@@ -108,7 +108,7 @@ public class BlabController {
 	}
 	
 	@PostMapping("/comments")
-	public ResponseDetails<?> postBlabComment(@RequestBody CommentDto commentDto){
+	public ResponseDetails<?> createBlabComment(@RequestBody CommentDto commentDto){
 		CommentDto savedCommentDto;
 		try {
 			savedCommentDto = blabService.createBlabComment(commentDto);
@@ -129,7 +129,7 @@ public class BlabController {
 		try {
 			blabService.getBlabComments(id).forEach(lista::add);
 			if(lista.isEmpty()) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blabs not found");
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blab Comments not found");
 				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
 			return new ResponseDetails<List<CommentDto>>("OK",new Date(),new ResponseEntity<List<CommentDto>>(lista, HttpStatus.OK));
@@ -150,8 +150,8 @@ public class BlabController {
 		}
 	}
 	
-	@PostMapping("/comments")
-	public ResponseDetails<?> postBlabLikes(@RequestBody LikeDto likeDto){
+	@PostMapping("/likes")
+	public ResponseDetails<?> createBlabLike(@RequestBody LikeDto likeDto){
 		LikeDto savedLikeDto;
 		try {
 			savedLikeDto = blabService.createBlabLike(likeDto);
@@ -166,27 +166,27 @@ public class BlabController {
 		}
 	}
 	
-	@GetMapping("/{id}/comments")
-	public ResponseDetails<?> getBlabComments(@PathVariable Long id){
-		List<CommentDto> lista = new ArrayList<CommentDto>();
+	@GetMapping("/{id}/likes")
+	public ResponseDetails<?> getBlabLikes(@PathVariable Long id){
+		List<LikeDto> lista = new ArrayList<LikeDto>();
 		try {
-			blabService.getBlabComments(id).forEach(lista::add);
+			blabService.getBlabLikes(id).forEach(lista::add);
 			if(lista.isEmpty()) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blabs not found");
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blab Likes not found");
 				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
-			return new ResponseDetails<List<CommentDto>>("OK",new Date(),new ResponseEntity<List<CommentDto>>(lista, HttpStatus.OK));
+			return new ResponseDetails<List<LikeDto>>("OK",new Date(),new ResponseEntity<List<LikeDto>>(lista, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
 	
-	@DeleteMapping("/comments/{id}")
-	public ResponseDetails<?> deleteBlabComment(@PathVariable Long id){
+	@DeleteMapping("/likes/{id}")
+	public ResponseDetails<?> deleteBlabLike(@PathVariable Long id){
 		try {
-			blabService.deleteBlabComment(id);
-			return new ResponseDetails<String>("OK",new Date(),new ResponseEntity<String>("Blab Comment Deleted", HttpStatus.OK));
+			blabService.deleteBlabLike(id);
+			return new ResponseDetails<String>("OK",new Date(),new ResponseEntity<String>("Blab Like Deleted", HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
