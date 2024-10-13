@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.Blab;
+import com.enp.blabber.api.model.Comment;
 import com.enp.blabber.api.model.User;
 import com.enp.blabber.api.repository.BlabRepository;
 
@@ -52,6 +53,11 @@ public class BlabService {
 	public void deleteBlab(Long id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Comment createBlabComment(Comment comment) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	public Blab buildEntity(BlabDto blabDto) {
