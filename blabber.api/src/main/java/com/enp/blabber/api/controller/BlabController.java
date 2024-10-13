@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
+import com.enp.blabber.api.dto.CommentDto;
 import com.enp.blabber.api.model.Comment;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
@@ -106,16 +107,32 @@ public class BlabController {
 	}
 	
 	@PostMapping("/comments")
-	public ResponseDetails<?> postBlabComment(@RequestBody Comment comment){
-		Comment savedComment;
+	public ResponseDetails<?> postBlabComment(@RequestBody CommentDto commentDto){
+		CommentDto savedCommentDto;
 		try {
-			savedComment = blabService.createBlabComment(comment);
-			if(savedComment == null) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab Comment <"+savedComment+"> not saved");
+			savedCommentDto = blabService.createBlabComment(commentDto);
+			if(savedCommentDto == null) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab Comment <"+savedCommentDto+"> not saved");
 				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
 			}
-			return new ResponseDetails<Comment>("OK",new Date(),new ResponseEntity<Comment>(savedComment, HttpStatus.OK));
+			return new ResponseDetails<CommentDto>("OK",new Date(),new ResponseEntity<CommentDto>(savedCommentDto, HttpStatus.OK));
 		}catch(Exception e){
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@GetMapping("/{id}/comments")
+	public ResponseDetails<?> getBlabComments(@PathVariable Long id){
+		List<CommentDto> lista = new ArrayList<CommentDto>();
+		try {
+			blabService.getBlabComments(id).forEach(lista::add);
+			if(lista.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NO_CONTENT.toString(),"Blabs not found");
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<List<CommentDto>>("OK",new Date(),new ResponseEntity<List<CommentDto>>(lista, HttpStatus.OK));
+		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}

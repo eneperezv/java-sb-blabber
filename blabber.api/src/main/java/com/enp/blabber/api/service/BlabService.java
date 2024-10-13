@@ -16,17 +16,14 @@ package com.enp.blabber.api.service;
  */
 
 import java.util.List;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enp.blabber.api.dto.BlabDto;
-import com.enp.blabber.api.dto.UserDto;
+import com.enp.blabber.api.dto.CommentDto;
 import com.enp.blabber.api.model.Blab;
-import com.enp.blabber.api.model.Comment;
-import com.enp.blabber.api.model.User;
 import com.enp.blabber.api.repository.BlabRepository;
 
 @Service
@@ -55,7 +52,12 @@ public class BlabService {
 		
 	}
 
-	public Comment createBlabComment(Comment comment) {
+	public CommentDto createBlabComment(CommentDto commentDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<CommentDto> getBlabComments(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
