@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
+import com.enp.blabber.api.model.Comment;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
@@ -99,6 +100,22 @@ public class BlabController {
 			blabService.deleteBlab(id);
 			return new ResponseDetails<String>("OK",new Date(),new ResponseEntity<String>("Blab Deleted", HttpStatus.OK));
 		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@PostMapping("/comments")
+	public ResponseDetails<?> postBlabComment(@RequestBody Comment comment){
+		Comment savedComment;
+		try {
+			savedComment = blabService.createBlabComment(comment);
+			if(savedComment == null) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab Comment <"+savedComment+"> not saved");
+				return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<Comment>("OK",new Date(),new ResponseEntity<Comment>(savedComment, HttpStatus.OK));
+		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),"INTERNAL SERVER ERROR -> " + e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
