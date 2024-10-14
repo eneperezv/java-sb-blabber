@@ -47,7 +47,7 @@ public class Blab {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", nullable = false)
-    private User user;  // Usuario que publicó el Blab
+    private User id_user;  // Usuario que publicó el Blab
 
     @OneToMany(mappedBy = "blab", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();  // Comentarios del Blab
@@ -69,7 +69,7 @@ public class Blab {
 			LocalDateTime updatedAt) {
 		super();
 		this.content = content;
-		this.user = user;
+		this.id_user = user;
 		this.comments = comments;
 		this.likes = likes;
 		this.createdAt = createdAt;
@@ -93,11 +93,11 @@ public class Blab {
 	}
 
 	public User getUser() {
-		return user;
+		return id_user;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.id_user = user;
 	}
 
 	public List<Comment> getComments() {
@@ -134,7 +134,7 @@ public class Blab {
 
 	@Override
 	public String toString() {
-		return "Blab [id=" + id + ", content=" + content + ", user=" + user + ", createdAt=" + createdAt
+		return "Blab [id=" + id + ", content=" + content + ", user=" + id_user + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}
 

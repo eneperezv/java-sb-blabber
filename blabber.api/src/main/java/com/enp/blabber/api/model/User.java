@@ -51,18 +51,18 @@ public class User {
     private String name;
 
     // Relación con Blabs
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Blab> blabs = new ArrayList<>();  // Blabs publicados por el usuario
 
     // Relación con Follows
     @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Follow> following = new ArrayList<>();  // Usuarios a los que sigue
 
-    @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Follow> followers = new ArrayList<>();  // Usuarios que lo siguen
+    @OneToMany(mappedBy = "follows", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Follow> follows = new ArrayList<>();  // Usuarios que lo siguen
 
     // Relación con Notifications
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications = new ArrayList<>();  // Notificaciones recibidas
 
     // Relación con Direct Messages
@@ -129,11 +129,11 @@ public class User {
 	}
 
 	public List<Follow> getFollowers() {
-		return followers;
+		return follows;
 	}
 
 	public void setFollowers(List<Follow> followers) {
-		this.followers = followers;
+		this.follows = followers;
 	}
 
 	public List<Notification> getNotifications() {
@@ -163,7 +163,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", name="
-				+ name + ", blabs=" + blabs + ", following=" + following + ", followers=" + followers
+				+ name + ", blabs=" + blabs + ", following=" + following + ", follows=" + follows
 				+ ", notifications=" + notifications + ", sentMessages=" + sentMessages + ", receivedMessages="
 				+ receivedMessages + "]";
 	}

@@ -21,7 +21,7 @@ public class Notification {
 	private Long id;
 	
 	@Column(name = "id_user", nullable = false)
-	private User user;
+	private User id_user;
 	
 	@Column(nullable = false, length = 500)
 	private String message;
@@ -38,7 +38,7 @@ public class Notification {
 
 	public Notification(User user, String message, boolean isRead, LocalDateTime createdAt) {
 		super();
-		this.user = user;
+		this.id_user = user;
 		this.message = message;
 		this.isRead = isRead;
 		this.createdAt = createdAt;
@@ -53,11 +53,11 @@ public class Notification {
 	}
 
 	public User getUser() {
-		return user;
+		return id_user;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.id_user = user;
 	}
 
 	public String getMessage() {
@@ -86,7 +86,7 @@ public class Notification {
 
 	@Override
 	public String toString() {
-		return "Notification [id=" + id + ", user=" + user + ", message=" + message + ", isRead=" + isRead
+		return "Notification [id=" + id + ", user=" + id_user + ", message=" + message + ", isRead=" + isRead
 				+ ", createdAt=" + createdAt + "]";
 	}
 
