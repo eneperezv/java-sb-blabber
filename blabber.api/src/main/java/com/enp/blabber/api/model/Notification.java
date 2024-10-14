@@ -23,10 +23,10 @@ public class Notification {
 	@Column(name = "id_user", nullable = false)
 	private User user;
 	
-	@Column(name = "message", nullable = false)
+	@Column(nullable = false, length = 500)
 	private String message;
 	
-	@Column(name = "is_read", nullable = false)
+	@Column(nullable = false)
 	private boolean isRead;
 	
 	@Column(nullable = false)
