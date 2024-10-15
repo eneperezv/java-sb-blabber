@@ -26,5 +26,42 @@ public class LikeDto {
 	private User user;  // Usuario que dio el Like
     private Blab blab;  // Blab al que se le dio el Like
     private LocalDateTime likedAt;  // Fecha en la que se dio el Like
+    
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Blab getBlab() {
+		return blab;
+	}
+
+	public void setBlab(Blab blab) {
+		this.blab = blab;
+	}
+
+	public LocalDateTime getLikedAt() {
+		return likedAt;
+	}
+
+	public void setLikedAt(LocalDateTime likedAt) {
+		this.likedAt = likedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "LikeDto [id=" + id + ", user=" + user + ", blab=" + blab + ", likedAt=" + likedAt + "]";
+	}
 
 }
