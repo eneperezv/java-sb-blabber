@@ -15,6 +15,16 @@ package com.enp.blabber.api.dto;
  * @since 1.0
  */
 
+import java.time.LocalDateTime;
+
+import com.enp.blabber.api.model.Blab;
+import com.enp.blabber.api.model.User;
+
 public class LikeDto {
+	
+	private Long id;
+	private User user;  // Usuario que dio el Like
+    private Blab blab;  // Blab al que se le dio el Like
+    private LocalDateTime likedAt;  // Fecha en la que se dio el Like
 
 }
