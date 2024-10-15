@@ -1,8 +1,5 @@
 package com.enp.blabber.api.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * @(#)User.java 1.0 5/09/2024
  * 
@@ -17,6 +14,9 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
+
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
