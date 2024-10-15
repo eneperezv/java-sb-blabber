@@ -15,6 +15,17 @@ package com.enp.blabber.api.dto;
  * @since 1.0
  */
 
+import java.time.LocalDateTime;
+
+import com.enp.blabber.api.model.Blab;
+import com.enp.blabber.api.model.User;
+
 public class CommentDto {
+	
+	private Long id;
+    private String content;  // El contenido del comentario (también limitado a 280 caracteres)
+    private User user;  // Usuario que hizo el comentario
+    private Blab blab;  // Blab comentado
+    private LocalDateTime commentedAt;  // Fecha del comentario
 
 }
