@@ -27,5 +27,51 @@ public class CommentDto {
     private User user;  // Usuario que hizo el comentario
     private Blab blab;  // Blab comentado
     private LocalDateTime commentedAt;  // Fecha del comentario
+    
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Blab getBlab() {
+		return blab;
+	}
+
+	public void setBlab(Blab blab) {
+		this.blab = blab;
+	}
+
+	public LocalDateTime getCommentedAt() {
+		return commentedAt;
+	}
+
+	public void setCommentedAt(LocalDateTime commentedAt) {
+		this.commentedAt = commentedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentDto [id=" + id + ", content=" + content + ", user=" + user + ", blab=" + blab + ", commentedAt="
+				+ commentedAt + "]";
+	}
 
 }
