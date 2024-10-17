@@ -1,7 +1,7 @@
 package com.enp.blabber.api.controller;
 
 /*
- * @(#)FollowController.java 1.0 5/09/2024
+ * @(#)FollowController.java 1.0 15/10/2024
  * 
  * El código implementado en este formulario esta protegido
  * bajo las leyes internacionales del Derecho de Autor, sin embargo
