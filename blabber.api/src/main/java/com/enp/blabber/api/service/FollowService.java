@@ -1,7 +1,7 @@
 package com.enp.blabber.api.service;
 
 /*
- * @(#)FollowService.java 1.0 14/09/2024
+ * @(#)FollowService.java 1.0 14/10/2024
  * 
  * El código implementado en este formulario esta protegido
  * bajo las leyes internacionales del Derecho de Autor, sin embargo
