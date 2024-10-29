@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.enp.blabber.api.dto.UserDto;
+import com.enp.blabber.api.model.ErrorDetails;
+import com.enp.blabber.api.model.ResponseDetails;
+import com.enp.blabber.api.service.UserService;
+
 @RestController
 @RequestMapping("/api/v1/melodyflow/users")
 public class UserController {

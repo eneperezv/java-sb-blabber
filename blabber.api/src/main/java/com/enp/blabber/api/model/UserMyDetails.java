@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.enp.blabber.api.repository.UserRepository;
+
 @Service
 public class UserMyDetails implements UserDetailsService {
 	

@@ -5,6 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enp.blabber.api.dto.UserDto;
+import com.enp.blabber.api.model.User;
+import com.enp.blabber.api.repository.UserRepository;
+
 @Service
 public class UserService {
 	
