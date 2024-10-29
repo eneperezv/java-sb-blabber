@@ -8,7 +8,7 @@ public class BlabDto {
 	
 	private Long id;
     private String content;
-    private User user;
+    private UserDto userDto;
     private LocalDateTime createdAt;
     
 	public Long getId() {
@@ -27,12 +27,12 @@ public class BlabDto {
 		this.content = content;
 	}
 
-	public User getUser() {
-		return user;
+	public UserDto getUser() {
+		return userDto;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(UserDto user) {
+		this.userDto = user;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -45,7 +45,7 @@ public class BlabDto {
 
 	@Override
 	public String toString() {
-		return "BlabDto [id=" + id + ", content=" + content + ", user=" + user + ", createdAt=" + createdAt
+		return "BlabDto [id=" + id + ", content=" + content + ", user=" + userDto + ", createdAt=" + createdAt
 				+ "]";
 	}
 

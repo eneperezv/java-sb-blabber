@@ -48,5 +48,16 @@ public class UserService {
 		
 		return userDto;
 	}
+	
+	public UserDto buildDtoFromUser(User user) {
+		UserDto userDto = new UserDto();
+		userDto.setId(user.getId());
+		userDto.setUsername(user.getUsername());
+		userDto.setPassword(user.getPassword());
+		userDto.setRole(user.getRole());
+		userDto.setName(user.getName());
+		
+		return userDto;
+	}
 
 }

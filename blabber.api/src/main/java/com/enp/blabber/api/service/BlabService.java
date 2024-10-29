@@ -15,6 +15,9 @@ public class BlabService {
 	@Autowired
 	private BlabRepository blabRepository;
 	
+	@Autowired
+	private UserService userService;
+	
 	public BlabDto createBlab(BlabDto blabDto) {
 		return buildDto(Optional.of(blabRepository.save(buildEntity(blabDto))));
 	}
@@ -27,7 +30,7 @@ public class BlabService {
 		Blab blab = new Blab();
 		blab.setId(blabDto.getId());
 		blab.setContent(blabDto.getContent());
-		blab.setUser(blabDto.getUser());
+		blab.setUser(userService.buildEntity(blabDto.getUser()));
 		blab.setCreatedAt(blabDto.getCreatedAt());
 		
 		return blab;
@@ -37,7 +40,7 @@ public class BlabService {
 		BlabDto blabDto = new BlabDto();
 		blabDto.setId(optional.get().getId());
 		blabDto.setContent(optional.get().getContent());
-		blabDto.setUser(optional.get().getUser());
+		blabDto.setUser(userService.buildDtoFromUser(optional.get().getUser()));
 		blabDto.setCreatedAt(optional.get().getCreatedAt());
 		
 		return blabDto;

@@ -46,13 +46,12 @@ public class WebSecurityConfig {
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/auth").permitAll();
                     //USER
                     registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/users/**").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/users/register").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/users/create").hasRole("USER");
                     registry.requestMatchers(HttpMethod.PUT,  "/api/v1/blabber/users/**").hasRole("USER");
-                    /*
                     //CLIENT
-                    registry.requestMatchers(HttpMethod.POST, "/api/v1/reservite/client").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/reservite/client/by-nombre/**").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/reservite/client").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/blabs/create").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/blabs/**").hasRole("USER");
+                    /*
                     //HOTEL
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/reservite/hotel").hasRole("USER");
                     registry.requestMatchers(HttpMethod.GET,  "/api/v1/reservite/hotel").hasRole("USER");
