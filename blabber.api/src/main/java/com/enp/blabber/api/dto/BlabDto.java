@@ -2,11 +2,13 @@ package com.enp.blabber.api.dto;
 
 import java.time.LocalDateTime;
 
+import com.enp.blabber.api.model.User;
+
 public class BlabDto {
 	
 	private Long id;
     private String content;
-    private String username;
+    private User user;
     private LocalDateTime createdAt;
     
 	public Long getId() {
@@ -25,12 +27,12 @@ public class BlabDto {
 		this.content = content;
 	}
 
-	public String getUsername() {
-		return username;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -43,7 +45,7 @@ public class BlabDto {
 
 	@Override
 	public String toString() {
-		return "BlabDto [id=" + id + ", content=" + content + ", username=" + username + ", createdAt=" + createdAt
+		return "BlabDto [id=" + id + ", content=" + content + ", user=" + user + ", createdAt=" + createdAt
 				+ "]";
 	}
 

@@ -32,13 +32,6 @@ public class Blab {
 
     private LocalDateTime createdAt;
 
-	public Blab(String content, User user, LocalDateTime createdAt) {
-		super();
-		this.content = content;
-		this.user = user;
-		this.createdAt = createdAt;
-	}
-
 	public Long getId() {
 		return id;
 	}
