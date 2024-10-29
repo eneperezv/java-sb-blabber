@@ -43,16 +43,11 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(registry -> {
                     //registry.requestMatchers("/swagger-ui/**").permitAll();
                     //registry.requestMatchers("/v3/api-docs/**").permitAll();
-                    registry.requestMatchers(HttpMethod.POST, "/api/v1/melodyflow/auth").permitAll();
+                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/auth").permitAll();
                     //USER
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/melodyflow/users/**").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.POST, "/api/v1/melodyflow/users/register").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.PUT,  "/api/v1/melodyflow/users/**").hasRole("USER");
-                    //SPOTIFY
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/melodyflow/spotify/track/**").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/melodyflow/spotify/artist/search/**").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/melodyflow/spotify/album/**/tracks").hasRole("USER");
-                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/melodyflow/spotify/playlist/**").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/users/**").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/users/register").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.PUT,  "/api/v1/blabber/users/**").hasRole("USER");
                     /*
                     //CLIENT
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/reservite/client").hasRole("USER");
