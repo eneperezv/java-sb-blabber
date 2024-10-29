@@ -19,13 +19,13 @@ import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.UserService;
 
 @RestController
-@RequestMapping("/api/v1/melodyflow/users")
+@RequestMapping("/api/v1/blabber/users")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/register")
+	@PostMapping("/create")
 	public ResponseDetails<?> createUser(@RequestBody UserDto userDto){
 		UserDto savedUserDto;
 		try{
