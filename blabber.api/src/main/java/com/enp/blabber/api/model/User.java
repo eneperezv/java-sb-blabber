@@ -1,11 +1,16 @@
 package com.enp.blabber.api.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +34,27 @@ public class User {
 	
 	@Column(name="name")
     private String name;
+	
+	@Column(nullable = false, unique = true)
+    private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Blab> blabs = new ArrayList<>();
+
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Follow> following = new ArrayList<>();
+
+    @OneToMany(mappedBy = "followed", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Follow> followers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DirectMessage> sentMessages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DirectMessage> receivedMessages = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -70,10 +96,68 @@ public class User {
 		this.name = name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Blab> getBlabs() {
+		return blabs;
+	}
+
+	public void setBlabs(List<Blab> blabs) {
+		this.blabs = blabs;
+	}
+
+	public List<Follow> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<Follow> following) {
+		this.following = following;
+	}
+
+	public List<Follow> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<Follow> followers) {
+		this.followers = followers;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public List<DirectMessage> getSentMessages() {
+		return sentMessages;
+	}
+
+	public void setSentMessages(List<DirectMessage> sentMessages) {
+		this.sentMessages = sentMessages;
+	}
+
+	public List<DirectMessage> getReceivedMessages() {
+		return receivedMessages;
+	}
+
+	public void setReceivedMessages(List<DirectMessage> receivedMessages) {
+		this.receivedMessages = receivedMessages;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", name="
-				+ name + "]";
+				+ name + ", email=" + email + ", blabs=" + blabs + ", following=" + following + ", followers="
+				+ followers + ", notifications=" + notifications + ", sentMessages=" + sentMessages
+				+ ", receivedMessages=" + receivedMessages + "]";
 	}
 
 }

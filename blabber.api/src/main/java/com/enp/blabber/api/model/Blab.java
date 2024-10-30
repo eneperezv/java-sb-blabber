@@ -58,6 +58,10 @@ public class Blab {
         this.commentsCount = comments.size();
         this.likesCount = likes.size();
     }
+    
+    public Blab() {
+    	
+    }
 
 	public Blab(String content, User user, List<Comment> comments, List<Like> likes, LocalDateTime createdAt,
 			int commentsCount, int likesCount) {
