@@ -21,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enp.blabber.api.dto.BlabDto;
+import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.Blab;
+import com.enp.blabber.api.model.User;
 import com.enp.blabber.api.repository.BlabRepository;
 
 @Service
@@ -57,6 +59,16 @@ public class BlabService {
 		blabDto.setContent(optional.get().getContent());
 		blabDto.setUserDto(userService.buildDtoFromUser(optional.get().getUser()));
 		blabDto.setCreatedAt(optional.get().getCreatedAt());
+		
+		return blabDto;
+	}
+	
+	public BlabDto buildDtoFromBlab(Blab blab) {
+		BlabDto blabDto = new BlabDto();
+		blabDto.setId(blab.getId());
+		blabDto.setContent(blab.getContent());
+		blabDto.setUserDto(userService.buildDtoFromUser(blab.getUser()));
+		blabDto.setCreatedAt(blab.getCreatedAt());
 		
 		return blabDto;
 	}

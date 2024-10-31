@@ -28,9 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
+import com.enp.blabber.api.dto.LikeDto;
+import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
+import com.enp.blabber.api.service.LikeService;
 
 @RestController
 @RequestMapping("/api/v1/blabber/blabs")
@@ -38,6 +41,9 @@ public class BlabController {
 	
 	@Autowired
 	private BlabService blabService;
+	
+	@Autowired
+	private LikeService likeService;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createBlab(@RequestBody BlabDto blabDto){
@@ -71,9 +77,21 @@ public class BlabController {
 		}
 	}
 	
-	@PostMapping()
-	public ResponseDetails<?> setBlabLike(@PathVariable Long id){
-		
+	@PostMapping("/like/{id}")
+	public ResponseDetails<?> setBlabLike(@RequestBody LikeDto likeDto){
+		System.out.println("HOLA->"+likeDto.toString());
+		LikeDto savedLikeDto;
+		try{
+			savedLikeDto = likeService.setBlabLike(likeDto);
+			if(savedLikeDto == null) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Like <"+savedLikeDto+"> not registered");
+				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_CREATED", HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<LikeDto>("OK",new Date(),new ResponseEntity<LikeDto>(savedLikeDto, HttpStatus.OK));
+		}catch(Exception e){
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
 	}
 
 }

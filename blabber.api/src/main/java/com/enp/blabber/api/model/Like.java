@@ -45,6 +45,10 @@ public class Like {
 
     @Column(nullable = false)
     private LocalDateTime likedAt;  // Fecha en la que se dio el Like
+    
+    public Like() {
+    	
+    }
 
 	public Like(User user, Blab blab, LocalDateTime likedAt) {
 		super();
