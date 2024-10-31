@@ -23,6 +23,8 @@ public class BlabDto {
     private String content;
     private UserDto userDto;
     private LocalDateTime createdAt;
+    private int commentsCount;
+    private int likesCount;
     
 	public Long getId() {
 		return id;
@@ -40,12 +42,12 @@ public class BlabDto {
 		this.content = content;
 	}
 
-	public UserDto getUser() {
+	public UserDto getUserDto() {
 		return userDto;
 	}
 
-	public void setUser(UserDto user) {
-		this.userDto = user;
+	public void setUserDto(UserDto userDto) {
+		this.userDto = userDto;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -56,10 +58,26 @@ public class BlabDto {
 		this.createdAt = createdAt;
 	}
 
+	public int getCommentsCount() {
+		return commentsCount;
+	}
+
+	public void setCommentsCount(int commentsCount) {
+		this.commentsCount = commentsCount;
+	}
+
+	public int getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(int likesCount) {
+		this.likesCount = likesCount;
+	}
+
 	@Override
 	public String toString() {
-		return "BlabDto [id=" + id + ", content=" + content + ", user=" + userDto + ", createdAt=" + createdAt
-				+ "]";
+		return "BlabDto [id=" + id + ", content=" + content + ", userDto=" + userDto + ", createdAt=" + createdAt
+				+ ", commentsCount=" + commentsCount + ", likesCount=" + likesCount + "]";
 	}
 
 }

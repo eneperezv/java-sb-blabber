@@ -70,5 +70,10 @@ public class BlabController {
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
+	
+	@PostMapping()
+	public ResponseDetails<?> setBlabLike(@PathVariable Long id){
+		
+	}
 
 }
