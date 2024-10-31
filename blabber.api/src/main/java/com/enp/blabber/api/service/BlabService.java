@@ -45,7 +45,7 @@ public class BlabService {
 		Blab blab = new Blab();
 		blab.setId(blabDto.getId());
 		blab.setContent(blabDto.getContent());
-		blab.setUser(userService.buildEntity(blabDto.getUser()));
+		blab.setUser(userService.buildEntity(blabDto.getUserDto()));
 		blab.setCreatedAt(blabDto.getCreatedAt());
 		
 		return blab;
@@ -55,7 +55,7 @@ public class BlabService {
 		BlabDto blabDto = new BlabDto();
 		blabDto.setId(optional.get().getId());
 		blabDto.setContent(optional.get().getContent());
-		blabDto.setUser(userService.buildDtoFromUser(optional.get().getUser()));
+		blabDto.setUserDto(userService.buildDtoFromUser(optional.get().getUser()));
 		blabDto.setCreatedAt(optional.get().getCreatedAt());
 		
 		return blabDto;

@@ -35,7 +35,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, length = 280)
+    @Column(nullable = false, length = 500)
     private String content;  // El contenido del comentario (limitado a 280 caracteres)
 
     @ManyToOne(fetch = FetchType.LAZY)

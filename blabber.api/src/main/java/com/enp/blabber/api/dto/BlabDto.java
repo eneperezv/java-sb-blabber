@@ -16,6 +16,8 @@ package com.enp.blabber.api.dto;
  */
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlabDto {
 	
@@ -23,6 +25,8 @@ public class BlabDto {
     private String content;
     private UserDto userDto;
     private LocalDateTime createdAt;
+    private List<CommentDto> comments = new ArrayList<>();
+    private List<LikeDto> likes = new ArrayList<>();
     private int commentsCount;
     private int likesCount;
     
@@ -58,6 +62,22 @@ public class BlabDto {
 		this.createdAt = createdAt;
 	}
 
+	public List<CommentDto> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentDto> comments) {
+		this.comments = comments;
+	}
+
+	public List<LikeDto> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<LikeDto> likes) {
+		this.likes = likes;
+	}
+
 	public int getCommentsCount() {
 		return commentsCount;
 	}
@@ -77,7 +97,8 @@ public class BlabDto {
 	@Override
 	public String toString() {
 		return "BlabDto [id=" + id + ", content=" + content + ", userDto=" + userDto + ", createdAt=" + createdAt
-				+ ", commentsCount=" + commentsCount + ", likesCount=" + likesCount + "]";
+				+ ", comments=" + comments + ", likes=" + likes + ", commentsCount=" + commentsCount + ", likesCount="
+				+ likesCount + "]";
 	}
 
 }
