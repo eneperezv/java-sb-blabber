@@ -78,7 +78,7 @@ public class BlabDto {
 		this.likes = likes;
 	}
 
-	public int getCommentsCount() {
+	public Integer getCommentsCount() {
 		return commentsCount;
 	}
 
@@ -86,7 +86,7 @@ public class BlabDto {
 		this.commentsCount = commentsCount;
 	}
 
-	public int getLikesCount() {
+	public Integer getLikesCount() {
 		return likesCount;
 	}
 

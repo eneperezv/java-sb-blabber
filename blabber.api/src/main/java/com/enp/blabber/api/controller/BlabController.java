@@ -73,7 +73,7 @@ public class BlabController {
 			if(savedBlabDto == null) {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab <"+savedBlabDto+"> not found");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
-			}/*
+			}
 			List<LikeDto> likes = new ArrayList<LikeDto>();
 			likeService.findAllByBladId(savedBlabDto.getId()).forEach(likes::add);
 			if(likes.isEmpty()) {
@@ -86,7 +86,7 @@ public class BlabController {
 				savedBlabDto.setLikesCount(likes.size());
 				savedBlabDto.setComments(new ArrayList<CommentDto>());
 				savedBlabDto.setCommentsCount(0);
-			}*/
+			}
 			return new ResponseDetails<BlabDto>("OK",new Date(),new ResponseEntity<BlabDto>(savedBlabDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());

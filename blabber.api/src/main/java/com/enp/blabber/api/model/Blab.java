@@ -62,10 +62,10 @@ public class Blab {
     private LocalDateTime createdAt;
 
     @Transient
-    private int commentsCount;
+    private Integer commentsCount;
 
     @Transient
-    private int likesCount;
+    private Integer likesCount;
 
     @PostLoad
     @PostPersist
@@ -79,7 +79,7 @@ public class Blab {
     }
 
 	public Blab(String content, User user, List<Comment> comments, List<Like> likes, LocalDateTime createdAt,
-			int commentsCount, int likesCount) {
+			Integer commentsCount, Integer likesCount) {
 		super();
 		this.content = content;
 		this.user = user;
@@ -138,19 +138,19 @@ public class Blab {
 		this.createdAt = createdAt;
 	}
 
-	public int getCommentsCount() {
+	public Integer getCommentsCount() {
 		return commentsCount;
 	}
 
-	public void setCommentsCount(int commentsCount) {
+	public void setCommentsCount(Integer commentsCount) {
 		this.commentsCount = commentsCount;
 	}
 
-	public int getLikesCount() {
+	public Integer getLikesCount() {
 		return likesCount;
 	}
 
-	public void setLikesCount(int likesCount) {
+	public void setLikesCount(Integer likesCount) {
 		this.likesCount = likesCount;
 	}
 
