@@ -48,6 +48,10 @@ public class Comment {
 
     @Column(nullable = false)
     private LocalDateTime commentedAt;  // Fecha del comentario
+    
+    public Comment() {
+    	
+    }
 
 	public Comment(String content, User user, Blab blab, LocalDateTime commentedAt) {
 		super();

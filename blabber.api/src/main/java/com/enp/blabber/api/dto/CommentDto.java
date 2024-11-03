@@ -21,8 +21,8 @@ public class CommentDto {
 	
 	private Long id;
     private String content;
-    private UserDto user;
-    private BlabDto blab;
+    private UserDto userDto;
+    private BlabDto blabDto;
     private LocalDateTime commentedAt;
     
 	public Long getId() {
@@ -41,20 +41,20 @@ public class CommentDto {
 		this.content = content;
 	}
 
-	public UserDto getUser() {
-		return user;
+	public UserDto getUserDto() {
+		return userDto;
 	}
 
-	public void setUser(UserDto user) {
-		this.user = user;
+	public void setUserDto(UserDto userDto) {
+		this.userDto = userDto;
 	}
 
-	public BlabDto getBlab() {
-		return blab;
+	public BlabDto getBlabDto() {
+		return blabDto;
 	}
 
-	public void setBlab(BlabDto blab) {
-		this.blab = blab;
+	public void setBlabDto(BlabDto blabDto) {
+		this.blabDto = blabDto;
 	}
 
 	public LocalDateTime getCommentedAt() {
@@ -67,8 +67,8 @@ public class CommentDto {
 
 	@Override
 	public String toString() {
-		return "CommentDto [id=" + id + ", content=" + content + ", user=" + user + ", blab=" + blab + ", commentedAt="
-				+ commentedAt + "]";
+		return "CommentDto [id=" + id + ", content=" + content + ", userDto=" + userDto + ", blabDto=" + blabDto
+				+ ", commentedAt=" + commentedAt + "]";
 	}
 
 }

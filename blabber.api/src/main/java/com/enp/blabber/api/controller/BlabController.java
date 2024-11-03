@@ -151,14 +151,14 @@ public class BlabController {
 	
 	@GetMapping("/comments/{blabid}")
 	public ResponseDetails<?> getBlabComments(@PathVariable Long blabid){
-		List<LikeDto> likes = new ArrayList<LikeDto>();
+		List<CommentDto> comments = new ArrayList<CommentDto>();
 		try {
-			likeService.findAllByBladId(blabid).forEach(likes::add);
-			if(likes.isEmpty()) {
-				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"This Blab has no likes.");
+			commentService.findAllByBladId(blabid).forEach(comments::add);
+			if(comments.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"This Blab has no comments.");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
-			return new ResponseDetails<List<LikeDto>>("OK",new Date(),new ResponseEntity<List<LikeDto>>(likes, HttpStatus.OK));
+			return new ResponseDetails<List<CommentDto>>("OK",new Date(),new ResponseEntity<List<CommentDto>>(comments, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
