@@ -1,5 +1,8 @@
 package com.enp.blabber.api.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * @(#)LikeService.java 1.0 31/10/2024
  * 
@@ -48,10 +51,10 @@ public class LikeService {
 	
 	public LikeDto buildDto(Optional<Like> optional) {
 		LikeDto likeDto = new LikeDto();
-		likeDto.setId(likeDto.getId());
+		likeDto.setId(optional.get().getId());
 		likeDto.setUserDto(userService.buildDtoFromUser(optional.get().getUser()));
 		likeDto.setBlabDto(blabService.buildDtoFromBlab(optional.get().getBlab()));
-		likeDto.setLikedAt(likeDto.getLikedAt());
+		likeDto.setLikedAt(optional.get().getLikedAt());
 		
 		return likeDto;
 	}
@@ -61,13 +64,26 @@ public class LikeService {
 		likeDto.setId(like.getId());
 		likeDto.setUserDto(userService.buildDtoFromUser(like.getUser()));
 		likeDto.setBlabDto(blabService.buildDtoFromBlab(like.getBlab()));
-		likeDto.setLikedAt(likeDto.getLikedAt());
+		likeDto.setLikedAt(like.getLikedAt());
 		
 		return likeDto;
 	}
 
 	public LikeDto setBlabLike(LikeDto likeDto) {
 		return buildDto(Optional.of(likeRepository.save(buildEntity(likeDto))));
+	}
+	
+	public List<LikeDto> findAllByBladId(Long blabid){
+		List<Like> likesLista = new ArrayList<Like>();
+		likeRepository.findAllByBladId(blabid).forEach(likesLista::add);
+		
+		List<LikeDto> likesDto = new ArrayList<LikeDto>();
+		
+		for(Like like : likesLista){
+			likesDto.add(buildDtoFromLike(like));
+		}
+
+		return likesDto;
 	}
 
 }

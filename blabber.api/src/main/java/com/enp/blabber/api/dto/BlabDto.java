@@ -27,8 +27,8 @@ public class BlabDto {
     private LocalDateTime createdAt;
     private List<CommentDto> comments = new ArrayList<>();
     private List<LikeDto> likes = new ArrayList<>();
-    private int commentsCount;
-    private int likesCount;
+    private Integer commentsCount;
+    private Integer likesCount;
     
 	public Long getId() {
 		return id;
@@ -82,7 +82,7 @@ public class BlabDto {
 		return commentsCount;
 	}
 
-	public void setCommentsCount(int commentsCount) {
+	public void setCommentsCount(Integer commentsCount) {
 		this.commentsCount = commentsCount;
 	}
 
@@ -90,7 +90,7 @@ public class BlabDto {
 		return likesCount;
 	}
 
-	public void setLikesCount(int likesCount) {
+	public void setLikesCount(Integer likesCount) {
 		this.likesCount = likesCount;
 	}
 

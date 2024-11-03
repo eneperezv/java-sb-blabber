@@ -1,5 +1,7 @@
 package com.enp.blabber.api.repository;
 
+import java.util.List;
+
 /*
  * @(#)LikeRepository.java 1.0 31/10/2024
  * 
@@ -16,11 +18,15 @@ package com.enp.blabber.api.repository;
  */
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.enp.blabber.api.model.Like;
 
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long> {
+	
+	@Query(value = "SELECT a.* FROM likes a WHERE a.blab_id = :blabid", nativeQuery = true)
+	List<Like> findAllByBladId(Long blabid);
 
 }

@@ -1,5 +1,7 @@
 package com.enp.blabber.api.controller;
 
+import java.util.ArrayList;
+
 /*
  * @(#)BlabController.java 1.0 29/10/2024
  * 
@@ -16,6 +18,7 @@ package com.enp.blabber.api.controller;
  */
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.LikeDto;
-import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.ErrorDetails;
+import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
 import com.enp.blabber.api.service.LikeService;
@@ -70,6 +73,15 @@ public class BlabController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Blab <"+savedBlabDto+"> not found");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
+			List<LikeDto> likes = new ArrayList<LikeDto>();
+			likeService.findAllByBladId(savedBlabDto.getId()).forEach(likes::add);
+			if(likes.isEmpty()) {
+				savedBlabDto.setLikes(null);
+				savedBlabDto.setLikesCount(0);
+			}else {
+				savedBlabDto.setLikes(likes);
+				savedBlabDto.setLikesCount(likes.size());
+			}
 			return new ResponseDetails<BlabDto>("OK",new Date(),new ResponseEntity<BlabDto>(savedBlabDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
@@ -77,9 +89,8 @@ public class BlabController {
 		}
 	}
 	
-	@PostMapping("/like/{id}")
+	@PostMapping("/like")
 	public ResponseDetails<?> setBlabLike(@RequestBody LikeDto likeDto){
-		System.out.println("HOLA->"+likeDto.toString());
 		LikeDto savedLikeDto;
 		try{
 			savedLikeDto = likeService.setBlabLike(likeDto);
@@ -89,6 +100,22 @@ public class BlabController {
 			}
 			return new ResponseDetails<LikeDto>("OK",new Date(),new ResponseEntity<LikeDto>(savedLikeDto, HttpStatus.OK));
 		}catch(Exception e){
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@GetMapping("/likes/{blabid}")
+	public ResponseDetails<?> getBlabLikes(@PathVariable Long blabid){
+		List<LikeDto> likes = new ArrayList<LikeDto>();
+		try {
+			likeService.findAllByBladId(blabid).forEach(likes::add);
+			if(likes.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"This Blab has no likes.");
+				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<List<LikeDto>>("OK",new Date(),new ResponseEntity<List<LikeDto>>(likes, HttpStatus.OK));
+		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
