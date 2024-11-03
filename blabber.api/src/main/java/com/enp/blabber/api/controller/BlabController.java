@@ -79,16 +79,21 @@ public class BlabController {
 			}
 			List<LikeDto> likes = new ArrayList<LikeDto>();
 			likeService.findAllByBladId(savedBlabDto.getId()).forEach(likes::add);
+			List<CommentDto> comments = new ArrayList<CommentDto>();
+			commentService.findAllByBladId(savedBlabDto.getId()).forEach(comments::add);
 			if(likes.isEmpty()) {
 				savedBlabDto.setLikes(new ArrayList<LikeDto>());
 				savedBlabDto.setLikesCount(0);
-				savedBlabDto.setComments(new ArrayList<CommentDto>());
-				savedBlabDto.setCommentsCount(0);
 			}else {
 				savedBlabDto.setLikes(likes);
 				savedBlabDto.setLikesCount(likes.size());
+			}
+			if(comments.isEmpty()) {
 				savedBlabDto.setComments(new ArrayList<CommentDto>());
 				savedBlabDto.setCommentsCount(0);
+			}else {
+				savedBlabDto.setComments(comments);
+				savedBlabDto.setCommentsCount(comments.size());
 			}
 			return new ResponseDetails<BlabDto>("OK",new Date(),new ResponseEntity<BlabDto>(savedBlabDto, HttpStatus.OK));
 		}catch(Exception e) {
