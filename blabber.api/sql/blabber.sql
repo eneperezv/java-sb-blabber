@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 22:17:37
+-- Tiempo de generación: 03-11-2024 a las 02:47:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -36,6 +36,15 @@ CREATE TABLE `comments` (
   `blab_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comments`
+--
+
+INSERT INTO `comments` (`id`, `commented_at`, `content`, `blab_id`, `user_id`) VALUES
+(1, '2024-11-02 20:05:00.000000', 'Este es un comentario de prueba', 1, 1),
+(2, '2024-11-02 20:05:00.000000', 'Este es otro comentario de prueba', 1, 2),
+(3, '2024-11-02 20:05:00.000000', 'Este es otro comentario de prueba', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +88,8 @@ CREATE TABLE `dbo_users` (
 --
 
 INSERT INTO `dbo_users` (`id_user`, `name`, `password`, `role`, `username`, `email`) VALUES
-(1, 'Eliezer Navarro P.', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'enp', '');
+(1, 'Eliezer Navarro P.', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'enp', 'eneperezv@gmail.com'),
+(2, 'Rayme Velandia', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'ray', 'raymevg@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -121,6 +131,16 @@ CREATE TABLE `likes` (
   `blab_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `likes`
+--
+
+INSERT INTO `likes` (`id`, `liked_at`, `blab_id`, `user_id`) VALUES
+(1, '2024-11-02 19:16:00.000000', 1, 1),
+(2, '2024-11-02 19:17:00.000000', 2, 1),
+(3, '2024-11-02 19:17:00.000000', 3, 1),
+(4, '2024-11-02 19:16:00.000000', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -201,7 +221,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT de la tabla `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `dbo_blabs`
@@ -213,7 +233,7 @@ ALTER TABLE `dbo_blabs`
 -- AUTO_INCREMENT de la tabla `dbo_users`
 --
 ALTER TABLE `dbo_users`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `direct_messages`
@@ -231,7 +251,7 @@ ALTER TABLE `follows`
 -- AUTO_INCREMENT de la tabla `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `notifications`
