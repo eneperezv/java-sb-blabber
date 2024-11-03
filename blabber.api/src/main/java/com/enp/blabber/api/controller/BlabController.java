@@ -34,9 +34,9 @@ import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.CommentDto;
 import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.model.ErrorDetails;
-import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
+import com.enp.blabber.api.service.CommentService;
 import com.enp.blabber.api.service.LikeService;
 
 @RestController
@@ -48,6 +48,9 @@ public class BlabController {
 	
 	@Autowired
 	private LikeService likeService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createBlab(@RequestBody BlabDto blabDto){
@@ -93,7 +96,9 @@ public class BlabController {
 			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
 		}
 	}
-	
+	//
+	//LIKES
+	//
 	@PostMapping("/like")
 	public ResponseDetails<?> setBlabLike(@RequestBody LikeDto likeDto){
 		LikeDto savedLikeDto;
@@ -112,6 +117,40 @@ public class BlabController {
 	
 	@GetMapping("/likes/{blabid}")
 	public ResponseDetails<?> getBlabLikes(@PathVariable Long blabid){
+		List<LikeDto> likes = new ArrayList<LikeDto>();
+		try {
+			likeService.findAllByBladId(blabid).forEach(likes::add);
+			if(likes.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"This Blab has no likes.");
+				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<List<LikeDto>>("OK",new Date(),new ResponseEntity<List<LikeDto>>(likes, HttpStatus.OK));
+		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	//
+	//COMENTS
+	//
+	@PostMapping("/comment")
+	public ResponseDetails<?> setBlabComment(@RequestBody CommentDto commentDto){
+		CommentDto savedCommentDto;
+		try{
+			savedCommentDto = commentService.setBlabComment(commentDto);
+			if(savedCommentDto == null) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Comment <"+savedCommentDto+"> not registered");
+				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_CREATED", HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<CommentDto>("OK",new Date(),new ResponseEntity<CommentDto>(savedCommentDto, HttpStatus.OK));
+		}catch(Exception e){
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
+	@GetMapping("/comments/{blabid}")
+	public ResponseDetails<?> getBlabComments(@PathVariable Long blabid){
 		List<LikeDto> likes = new ArrayList<LikeDto>();
 		try {
 			likeService.findAllByBladId(blabid).forEach(likes::add);
