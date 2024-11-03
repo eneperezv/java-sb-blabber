@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
+import com.enp.blabber.api.service.BlabService;
 import com.enp.blabber.api.service.UserService;
 
 @RestController
@@ -39,6 +40,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BlabService blabService;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createUser(@RequestBody UserDto userDto){

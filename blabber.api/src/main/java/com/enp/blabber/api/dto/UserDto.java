@@ -15,6 +15,9 @@ package com.enp.blabber.api.dto;
  * @since 1.0
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDto {
 	
 	private Long id;
@@ -22,11 +25,14 @@ public class UserDto {
     private String password;
     private String role;
     private String name;
+    private String email;
+    private List<BlabDto> blabsDto = new ArrayList<>();
+    private List<FollowDto> followingDto = new ArrayList<>();
+    private List<FollowDto> followersDto = new ArrayList<>();
+    private List<NotificationDto> notificationsDto = new ArrayList<>();
+    private List<DirectMessageDto> sentMessagesDto = new ArrayList<>();
+    private List<DirectMessageDto> receivedMessagesDto = new ArrayList<>();
     
-    public UserDto() {
-    	
-    }
-
 	public Long getId() {
 		return id;
 	}
@@ -67,10 +73,68 @@ public class UserDto {
 		this.name = name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<BlabDto> getBlabsDto() {
+		return blabsDto;
+	}
+
+	public void setBlabsDto(List<BlabDto> blabsDto) {
+		this.blabsDto = blabsDto;
+	}
+
+	public List<FollowDto> getFollowingDto() {
+		return followingDto;
+	}
+
+	public void setFollowingDto(List<FollowDto> followingDto) {
+		this.followingDto = followingDto;
+	}
+
+	public List<FollowDto> getFollowersDto() {
+		return followersDto;
+	}
+
+	public void setFollowersDto(List<FollowDto> followersDto) {
+		this.followersDto = followersDto;
+	}
+
+	public List<NotificationDto> getNotificationsDto() {
+		return notificationsDto;
+	}
+
+	public void setNotificationsDto(List<NotificationDto> notificationsDto) {
+		this.notificationsDto = notificationsDto;
+	}
+
+	public List<DirectMessageDto> getSentMessagesDto() {
+		return sentMessagesDto;
+	}
+
+	public void setSentMessagesDto(List<DirectMessageDto> sentMessagesDto) {
+		this.sentMessagesDto = sentMessagesDto;
+	}
+
+	public List<DirectMessageDto> getReceivedMessagesDto() {
+		return receivedMessagesDto;
+	}
+
+	public void setReceivedMessagesDto(List<DirectMessageDto> receivedMessagesDto) {
+		this.receivedMessagesDto = receivedMessagesDto;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", name="
-				+ name + "]";
+				+ name + ", email=" + email + ", blabsDto=" + blabsDto + ", followingDto=" + followingDto
+				+ ", followersDto=" + followersDto + ", notificationsDto=" + notificationsDto + ", sentMessagesDto="
+				+ sentMessagesDto + ", receivedMessagesDto=" + receivedMessagesDto + "]";
 	}
 
 }

@@ -35,14 +35,6 @@ public class BlabService {
 	@Autowired
 	private UserService userService;
 	
-	public BlabDto createBlab(BlabDto blabDto) {
-		return buildDto(Optional.of(blabRepository.save(buildEntity(blabDto))));
-	}
-
-	public BlabDto findById(Long id) {
-		return buildDto(blabRepository.findById(id));
-	}
-	
 	public Blab buildEntity(BlabDto blabDto) {
 		Blab blab = new Blab();
 		blab.setId(blabDto.getId());
@@ -71,6 +63,14 @@ public class BlabService {
 		blabDto.setCreatedAt(blab.getCreatedAt());
 		
 		return blabDto;
+	}
+	
+	public BlabDto createBlab(BlabDto blabDto) {
+		return buildDto(Optional.of(blabRepository.save(buildEntity(blabDto))));
+	}
+
+	public BlabDto findById(Long id) {
+		return buildDto(blabRepository.findById(id));
 	}
 
 }
