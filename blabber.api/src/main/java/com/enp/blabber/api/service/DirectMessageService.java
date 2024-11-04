@@ -54,4 +54,8 @@ public class DirectMessageService {
 		return dmDto;
 	}
 
+	public DirectMessageDto sendDm(DirectMessageDto dmDto) {
+		return buildDto(Optional.of(dmRepository.save(buildEntity(dmDto))));
+	}
+
 }
