@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2024 a las 02:47:45
+-- Tiempo de generación: 04-11-2024 a las 05:27:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -105,6 +105,13 @@ CREATE TABLE `direct_messages` (
   `receiver_id` bigint(20) NOT NULL,
   `sender_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `direct_messages`
+--
+
+INSERT INTO `direct_messages` (`id`, `content`, `is_read`, `sent_at`, `receiver_id`, `sender_id`) VALUES
+(1, 'Este es un mensaje directo de preuba', b'0', '2024-11-03 10:28:00.000000', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -239,7 +246,7 @@ ALTER TABLE `dbo_users`
 -- AUTO_INCREMENT de la tabla `direct_messages`
 --
 ALTER TABLE `direct_messages`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `follows`
