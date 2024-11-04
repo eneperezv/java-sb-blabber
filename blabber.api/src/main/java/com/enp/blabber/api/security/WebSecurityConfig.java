@@ -63,6 +63,8 @@ public class WebSecurityConfig {
                     registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/users/**").hasRole("USER");
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/users/create").hasRole("USER");
                     registry.requestMatchers(HttpMethod.PUT,  "/api/v1/blabber/users/**").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/users/dm/send").hasRole("USER");
+                    registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/users/dm/sent/**").hasRole("USER");
                     //BLAB
                     registry.requestMatchers(HttpMethod.POST, "/api/v1/blabber/blabs/create").hasRole("USER");
                     registry.requestMatchers(HttpMethod.GET,  "/api/v1/blabber/blabs/**").hasRole("USER");

@@ -1,12 +1,16 @@
 package com.enp.blabber.api.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enp.blabber.api.dto.DirectMessageDto;
+import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.model.DirectMessage;
+import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.repository.DirectMessageRepository;
 
 @Service
@@ -56,6 +60,19 @@ public class DirectMessageService {
 
 	public DirectMessageDto sendDm(DirectMessageDto dmDto) {
 		return buildDto(Optional.of(dmRepository.save(buildEntity(dmDto))));
+	}
+
+	public List<DirectMessageDto> getDmSent(Long userId) {
+		List<DirectMessage> listaDm = new ArrayList<DirectMessage>();
+		dmRepository.getDmSent(userId).forEach(listaDm::add);
+		
+		List<DirectMessageDto> listaDmDto = new ArrayList<DirectMessageDto>();
+		
+		for(DirectMessage dm : listaDm){
+			listaDmDto.add(buildDtoFromDirectMessage(dm));
+		}
+
+		return listaDmDto;
 	}
 
 }
