@@ -9,7 +9,7 @@ import com.enp.blabber.api.model.DirectMessage;
 
 public interface DirectMessageRepository extends JpaRepository<DirectMessage, Long> {
 	
-	@Query(value = "SELECT a.* FROM direct_messages a WHERE a.sender_id_id = :userId", nativeQuery = true)
+	@Query(value = "SELECT a.* FROM direct_messages a WHERE a.sender_id = :userId", nativeQuery = true)
 	List<DirectMessage> getDmSent(Long userId);
 
 }
