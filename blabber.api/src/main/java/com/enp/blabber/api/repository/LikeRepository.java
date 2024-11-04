@@ -1,7 +1,5 @@
 package com.enp.blabber.api.repository;
 
-import java.util.List;
-
 /*
  * @(#)LikeRepository.java 1.0 31/10/2024
  * 
@@ -16,6 +14,8 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
+
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

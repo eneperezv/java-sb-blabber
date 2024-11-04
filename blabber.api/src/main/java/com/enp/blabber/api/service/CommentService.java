@@ -1,11 +1,5 @@
 package com.enp.blabber.api.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 /*
  * @(#)CommentService.java 1.0 31/10/2024
  * 
@@ -21,12 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 1.0
  */
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enp.blabber.api.dto.CommentDto;
-import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.model.Comment;
-import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.repository.CommentRepository;
 
 @Service
