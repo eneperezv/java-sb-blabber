@@ -69,6 +69,11 @@ public class UserController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+userDto+"> not found");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
+			//OBTENER DMS RECIBIDOS
+			//OBTENER DMS ENVIADOS
+			//OBTENER NOTIFICACIONES
+			//OBTENER FOLLOWS
+			//OBTENER FOLLOWERS
 			return new ResponseDetails<UserDto>("OK",new Date(),new ResponseEntity<UserDto>(userDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());

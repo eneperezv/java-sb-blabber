@@ -51,6 +51,10 @@ public class DirectMessage {
     
     @Column(nullable = false)
     private boolean isRead;  // Indica si el mensaje ha sido leído
+    
+    public DirectMessage() {
+    	
+    }
 
 	public DirectMessage(User sender, User receiver, String content, LocalDateTime sentAt, boolean isRead) {
 		super();
