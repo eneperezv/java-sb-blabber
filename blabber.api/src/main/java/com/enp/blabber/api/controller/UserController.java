@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.DirectMessageDto;
 import com.enp.blabber.api.dto.NotificationDto;
 import com.enp.blabber.api.dto.UserDto;
@@ -86,8 +87,16 @@ public class UserController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+userDto+"> not found");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
-			//OBTENER BLABS
-			
+			//***OBTENER BLABS
+			List<BlabDto> blabsPublished = new ArrayList<BlabDto>();
+			blabService.getBlabsByUserId(userDto.getId()).forEach(blabsPublished::add);
+			if(blabsPublished.isEmpty()) {
+				userDto.setBlabsDto(new ArrayList<BlabDto>());
+				userDto.setBlabsCount(0);
+			}else {
+				userDto.setBlabsDto(blabsPublished);
+				userDto.setBlabsCount(blabsPublished.size());
+			}
 			//OBTENER DMS RECIBIDOS
 			List<DirectMessageDto> dmReceived = new ArrayList<DirectMessageDto>();
 			dmService.getDmReceived(userDto.getId()).forEach(dmReceived::add);
