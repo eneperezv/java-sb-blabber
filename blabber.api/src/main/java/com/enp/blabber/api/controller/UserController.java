@@ -1,7 +1,5 @@
 package com.enp.blabber.api.controller;
 
-import java.util.ArrayList;
-
 /*
  * @(#)UserController.java 1.0 29/10/2024
  * 
@@ -16,6 +14,8 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 1.0
  */
+
+import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.List;
@@ -97,7 +97,7 @@ public class UserController {
 				userDto.setBlabsDto(blabsPublished);
 				userDto.setBlabsCount(blabsPublished.size());
 			}
-			//OBTENER DMS RECIBIDOS
+			//***OBTENER DMS RECIBIDOS
 			List<DirectMessageDto> dmReceived = new ArrayList<DirectMessageDto>();
 			dmService.getDmReceived(userDto.getId()).forEach(dmReceived::add);
 			if(dmReceived.isEmpty()) {
