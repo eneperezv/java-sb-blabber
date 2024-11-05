@@ -1,5 +1,7 @@
 package com.enp.blabber.api.repository;
 
+import java.util.List;
+
 /*
  * @(#)NotificationRepository.java 1.0 29/10/2024
  * 
@@ -16,9 +18,13 @@ package com.enp.blabber.api.repository;
  */
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.enp.blabber.api.model.Notification;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
+	
+	@Query(value = "SELECT a.* FROM notifications a WHERE a.user_id = :userid", nativeQuery = true)
+	List<Notification> findAllByUserId(Long userid);
 
 }

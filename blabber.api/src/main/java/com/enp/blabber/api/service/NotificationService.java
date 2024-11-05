@@ -1,5 +1,8 @@
 package com.enp.blabber.api.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * @(#)NotificationService.java 1.0 29/10/2024
  * 
@@ -20,7 +23,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.dto.NotificationDto;
+import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.model.Notification;
 import com.enp.blabber.api.repository.NotificationRepository;
 
@@ -70,6 +75,17 @@ public class NotificationService {
 		notificationRepository.save(buildEntity(notificationDto));
 	}
 	
-	
+	public List<NotificationDto> getNotifications(Long userid){
+		List<Notification> notificationsLista = new ArrayList<Notification>();
+		notificationRepository.findAllByUserId(userid).forEach(notificationsLista::add);
+		
+		List<NotificationDto> notificationsDto = new ArrayList<NotificationDto>();
+		
+		for(Notification notification : notificationsLista){
+			notificationsDto.add(buildDtoFromNotification(notification));
+		}
+
+		return notificationsDto;
+	}
 
 }
