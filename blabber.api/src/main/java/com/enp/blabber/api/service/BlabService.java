@@ -1,5 +1,8 @@
 package com.enp.blabber.api.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * @(#)BlabService.java 1.0 29/10/2024
  * 
@@ -21,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enp.blabber.api.dto.BlabDto;
-import com.enp.blabber.api.dto.UserDto;
+import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.model.Blab;
-import com.enp.blabber.api.model.User;
+import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.repository.BlabRepository;
 
 @Service
@@ -71,6 +74,19 @@ public class BlabService {
 
 	public BlabDto findById(Long id) {
 		return buildDto(blabRepository.findById(id));
+	}
+	
+	public List<BlabDto> getBlabsByUserId(Long userid){
+		List<Blab> blabsLista = new ArrayList<Blab>();
+		blabRepository.getBlabsByUserId(userid).forEach(blabsLista::add);
+		
+		List<BlabDto> blabsDto = new ArrayList<BlabDto>();
+		
+		for(Blab blab : blabsLista){
+			blabsDto.add(buildDtoFromBlab(blab));
+		}
+
+		return blabsDto;
 	}
 
 }

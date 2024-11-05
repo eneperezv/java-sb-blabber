@@ -87,6 +87,7 @@ public class UserController {
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
 			//OBTENER BLABS
+			
 			//OBTENER DMS RECIBIDOS
 			List<DirectMessageDto> dmReceived = new ArrayList<DirectMessageDto>();
 			dmService.getDmReceived(userDto.getId()).forEach(dmReceived::add);

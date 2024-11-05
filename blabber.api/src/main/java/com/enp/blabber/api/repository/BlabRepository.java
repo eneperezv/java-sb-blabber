@@ -15,12 +15,18 @@ package com.enp.blabber.api.repository;
  * @since 1.0
  */
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.enp.blabber.api.model.Blab;
 
 @Repository
 public interface BlabRepository extends JpaRepository<Blab, Long> {
+	
+	@Query(value = "SELECT a.* FROM dbo_blabs a WHERE a.id_user = :userid", nativeQuery = true)
+	List<Blab> getBlabsByUserId(Long userid);
 
 }
