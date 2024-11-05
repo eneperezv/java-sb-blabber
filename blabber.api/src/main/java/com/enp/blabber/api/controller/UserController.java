@@ -96,6 +96,15 @@ public class UserController {
 				userDto.setSentMessagesDto(dmSent);
 			}
 			//OBTENER NOTIFICACIONES
+			List<NotificationDto> notifications = new ArrayList<NotificationDto>();
+			notificationService.getNotifications(userDto.getId()).forEach(notifications::add);
+			if(notifications.isEmpty()) {
+				userDto.setNotificationsDto(new ArrayList<NotificationDto>());
+				userDto.setNotificationCount(0);
+			}else {
+				userDto.setNotificationsDto(notifications);
+				userDto.setNotificationCount(notifications.size());
+			}
 			//OBTENER FOLLOWS
 			//OBTENER FOLLOWERS
 			return new ResponseDetails<UserDto>("OK",new Date(),new ResponseEntity<UserDto>(userDto, HttpStatus.OK));
