@@ -18,6 +18,8 @@ package com.enp.blabber.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Transient;
+
 public class UserDto {
 	
 	private Long id;
@@ -32,6 +34,11 @@ public class UserDto {
     private List<NotificationDto> notificationsDto = new ArrayList<>();
     private List<DirectMessageDto> sentMessagesDto = new ArrayList<>();
     private List<DirectMessageDto> receivedMessagesDto = new ArrayList<>();
+    private Integer blabsCount;
+    private Integer followersCount;
+    private Integer followingCount;
+    private Integer notificationCount;
+    private Integer dmReceivedCount;
     
 	public Long getId() {
 		return id;
@@ -129,12 +136,54 @@ public class UserDto {
 		this.receivedMessagesDto = receivedMessagesDto;
 	}
 
+	public Integer getBlabsCount() {
+		return blabsCount;
+	}
+
+	public void setBlabsCount(Integer blabsCount) {
+		this.blabsCount = blabsCount;
+	}
+
+	public Integer getFollowersCount() {
+		return followersCount;
+	}
+
+	public void setFollowersCount(Integer followersCount) {
+		this.followersCount = followersCount;
+	}
+
+	public Integer getFollowingCount() {
+		return followingCount;
+	}
+
+	public void setFollowingCount(Integer followingCount) {
+		this.followingCount = followingCount;
+	}
+
+	public Integer getNotificationCount() {
+		return notificationCount;
+	}
+
+	public void setNotificationCount(Integer notificationCount) {
+		this.notificationCount = notificationCount;
+	}
+
+	public Integer getDmReceivedCount() {
+		return dmReceivedCount;
+	}
+
+	public void setDmReceivedCount(Integer dmReceivedCount) {
+		this.dmReceivedCount = dmReceivedCount;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", name="
 				+ name + ", email=" + email + ", blabsDto=" + blabsDto + ", followingDto=" + followingDto
 				+ ", followersDto=" + followersDto + ", notificationsDto=" + notificationsDto + ", sentMessagesDto="
-				+ sentMessagesDto + ", receivedMessagesDto=" + receivedMessagesDto + "]";
+				+ sentMessagesDto + ", receivedMessagesDto=" + receivedMessagesDto + ", blabsCount=" + blabsCount
+				+ ", followersCount=" + followersCount + ", followingCount=" + followingCount + ", notificationCount="
+				+ notificationCount + ", dmReceivedCount=" + dmReceivedCount + "]";
 	}
 
 }

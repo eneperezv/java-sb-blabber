@@ -47,6 +47,10 @@ public class Notification {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;  // Fecha de creación de la notificación
+    
+    public Notification() {
+    	
+    }
 
 	public Notification(User user, String message, boolean isRead, LocalDateTime createdAt) {
 		super();

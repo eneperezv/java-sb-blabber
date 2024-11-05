@@ -31,14 +31,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.enp.blabber.api.dto.CommentDto;
 import com.enp.blabber.api.dto.DirectMessageDto;
+import com.enp.blabber.api.dto.NotificationDto;
 import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
 import com.enp.blabber.api.service.DirectMessageService;
+import com.enp.blabber.api.service.NotificationService;
 import com.enp.blabber.api.service.UserService;
+import com.enp.blabber.api.utils.DataUtils;
 
 @RestController
 @RequestMapping("/api/v1/blabber/users")
@@ -52,6 +54,12 @@ public class UserController {
 	
 	@Autowired
 	private DirectMessageService dmService;
+	
+	@Autowired
+	private NotificationService notificationService;
+	
+	@Autowired
+	private DataUtils util;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createUser(@RequestBody UserDto userDto){
@@ -128,6 +136,14 @@ public class UserController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Direct Message <"+savedDmDto+"> not sent");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
+			UserDto userDto = userService.findById(dmDto.getSenderDto().getId());
+			NotificationDto notification = new NotificationDto();
+			notification.setId(null);
+			notification.setUserDto(dmDto.getReceiverDto());
+			notification.setMessage(userDto.getUsername() + " has sent you a direct message.");
+			notification.setCreatedAt(util.getTimeNow());
+			notification.setRead(false);
+			notificationService.createNotification(notification);
 			return new ResponseDetails<DirectMessageDto>("OK",new Date(),new ResponseEntity<DirectMessageDto>(savedDmDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());

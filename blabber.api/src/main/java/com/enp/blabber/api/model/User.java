@@ -27,6 +27,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="dbo_users")
@@ -70,6 +71,21 @@ public class User {
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DirectMessage> receivedMessages = new ArrayList<>();
+
+    @Transient
+    private Integer blabsCount;
+
+    @Transient
+    private Integer followersCount;
+
+    @Transient
+    private Integer followingCount;
+
+    @Transient
+    private Integer notificationCount;
+
+    @Transient
+    private Integer dmReceivedCount;
 
 	public Long getId() {
 		return id;
@@ -167,12 +183,54 @@ public class User {
 		this.receivedMessages = receivedMessages;
 	}
 
+	public Integer getBlabsCount() {
+		return blabsCount;
+	}
+
+	public void setBlabsCount(Integer blabsCount) {
+		this.blabsCount = blabsCount;
+	}
+
+	public Integer getFollowersCount() {
+		return followersCount;
+	}
+
+	public void setFollowersCount(Integer followersCount) {
+		this.followersCount = followersCount;
+	}
+
+	public Integer getFollowingCount() {
+		return followingCount;
+	}
+
+	public void setFollowingCount(Integer followingCount) {
+		this.followingCount = followingCount;
+	}
+
+	public Integer getNotificationCount() {
+		return notificationCount;
+	}
+
+	public void setNotificationCount(Integer notificationCount) {
+		this.notificationCount = notificationCount;
+	}
+
+	public Integer getDmReceivedCount() {
+		return dmReceivedCount;
+	}
+
+	public void setDmReceivedCount(Integer dmReceivedCount) {
+		this.dmReceivedCount = dmReceivedCount;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", name="
 				+ name + ", email=" + email + ", blabs=" + blabs + ", following=" + following + ", followers="
 				+ followers + ", notifications=" + notifications + ", sentMessages=" + sentMessages
-				+ ", receivedMessages=" + receivedMessages + "]";
+				+ ", receivedMessages=" + receivedMessages + ", blabsCount=" + blabsCount + ", followersCount="
+				+ followersCount + ", followingCount=" + followingCount + ", notificationCount=" + notificationCount
+				+ ", dmReceivedCount=" + dmReceivedCount + "]";
 	}
 
 }
