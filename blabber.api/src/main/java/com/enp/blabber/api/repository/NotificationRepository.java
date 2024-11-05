@@ -1,7 +1,7 @@
 package com.enp.blabber.api.repository;
 
 /*
- * @(#)User.java 1.0 29/10/2024
+ * @(#)NotificationRepository.java 1.0 29/10/2024
  * 
  * El código implementado en este formulario esta protegido
  * bajo las leyes internacionales del Derecho de Autor, sin embargo
