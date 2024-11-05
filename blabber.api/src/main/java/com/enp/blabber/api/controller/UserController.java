@@ -86,7 +86,17 @@ public class UserController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"User <"+userDto+"> not found");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
+			//OBTENER BLABS
 			//OBTENER DMS RECIBIDOS
+			List<DirectMessageDto> dmReceived = new ArrayList<DirectMessageDto>();
+			dmService.getDmReceived(userDto.getId()).forEach(dmReceived::add);
+			if(dmReceived.isEmpty()) {
+				userDto.setReceivedMessagesDto(new ArrayList<DirectMessageDto>());
+				userDto.setDmReceivedCount(0);
+			}else {
+				userDto.setReceivedMessagesDto(dmReceived);
+				userDto.setDmReceivedCount(dmReceived.size());
+			}
 			//***OBTENER DMS ENVIADOS
 			List<DirectMessageDto> dmSent = new ArrayList<DirectMessageDto>();
 			dmService.getDmSent(userDto.getId()).forEach(dmSent::add);
@@ -95,7 +105,7 @@ public class UserController {
 			}else {
 				userDto.setSentMessagesDto(dmSent);
 			}
-			//OBTENER NOTIFICACIONES
+			//***OBTENER NOTIFICACIONES
 			List<NotificationDto> notifications = new ArrayList<NotificationDto>();
 			notificationService.getNotifications(userDto.getId()).forEach(notifications::add);
 			if(notifications.isEmpty()) {
