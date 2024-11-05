@@ -88,4 +88,17 @@ public class DirectMessageService {
 		return listaDmDto;
 	}
 
+	public List<DirectMessageDto> getDmReceived(Long userId) {
+		List<DirectMessage> listaDm = new ArrayList<DirectMessage>();
+		dmRepository.getDmReceived(userId).forEach(listaDm::add);
+		
+		List<DirectMessageDto> listaDmDto = new ArrayList<DirectMessageDto>();
+		
+		for(DirectMessage dm : listaDm){
+			listaDmDto.add(buildDtoFromDirectMessage(dm));
+		}
+
+		return listaDmDto;
+	}
+
 }

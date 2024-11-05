@@ -151,4 +151,20 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/dm/received/{id}")
+	public ResponseDetails<?> getDmReceived(@PathVariable Long userId){
+		List<DirectMessageDto> dmReceived = new ArrayList<DirectMessageDto>();
+		try {
+			dmService.getDmReceived(userId).forEach(dmReceived::add);
+			if(dmReceived.isEmpty()) {
+				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"This User has not sent DMs to anyone.");
+				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
+			}
+			return new ResponseDetails<List<DirectMessageDto>>("OK",new Date(),new ResponseEntity<List<DirectMessageDto>>(dmReceived, HttpStatus.OK));
+		}catch(Exception e) {
+			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
+			return new ResponseDetails<ErrorDetails>("ERROR",new Date(),new ResponseEntity<ErrorDetails>(err, HttpStatus.INTERNAL_SERVER_ERROR));
+		}
+	}
+	
 }
