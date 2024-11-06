@@ -1,8 +1,5 @@
 package com.enp.blabber.api.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * @(#)NotificationService.java 1.0 29/10/2024
  * 
@@ -18,14 +15,14 @@ import java.util.List;
  * @since 1.0
  */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.enp.blabber.api.dto.LikeDto;
 import com.enp.blabber.api.dto.NotificationDto;
-import com.enp.blabber.api.model.Like;
 import com.enp.blabber.api.model.Notification;
 import com.enp.blabber.api.repository.NotificationRepository;
 
