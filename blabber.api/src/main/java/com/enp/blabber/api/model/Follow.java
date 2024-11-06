@@ -45,6 +45,10 @@ public class Follow {
 
     @Column(nullable = false)
     private LocalDateTime followedAt;  // Fecha en la que comenzó a seguir
+    
+    public Follow() {
+    	
+    }
 
 	public Follow(User follower, User followed, LocalDateTime followedAt) {
 		super();

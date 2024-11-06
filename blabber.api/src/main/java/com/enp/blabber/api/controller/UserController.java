@@ -16,7 +16,6 @@ package com.enp.blabber.api.controller;
  */
 
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.List;
 
@@ -33,12 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.enp.blabber.api.dto.BlabDto;
 import com.enp.blabber.api.dto.DirectMessageDto;
+import com.enp.blabber.api.dto.FollowDto;
 import com.enp.blabber.api.dto.NotificationDto;
 import com.enp.blabber.api.dto.UserDto;
 import com.enp.blabber.api.model.ErrorDetails;
 import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
 import com.enp.blabber.api.service.DirectMessageService;
+import com.enp.blabber.api.service.FollowService;
 import com.enp.blabber.api.service.NotificationService;
 import com.enp.blabber.api.service.UserService;
 import com.enp.blabber.api.utils.DataUtils;
@@ -58,6 +59,9 @@ public class UserController {
 	
 	@Autowired
 	private NotificationService notificationService;
+	
+	@Autowired
+	private FollowService followService;
 	
 	@Autowired
 	private DataUtils util;
@@ -125,8 +129,26 @@ public class UserController {
 				userDto.setNotificationsDto(notifications);
 				userDto.setNotificationCount(notifications.size());
 			}
-			//OBTENER FOLLOWS
-			//OBTENER FOLLOWERS
+			//***OBTENER FOLLOWS
+			List<FollowDto> follows = new ArrayList<FollowDto>();
+			followService.getFollows(userDto.getId()).forEach(follows::add);
+			if(follows.isEmpty()) {
+				userDto.setFollowingDto(new ArrayList<FollowDto>());
+				userDto.setFollowingCount(0);
+			}else {
+				userDto.setFollowingDto(follows);
+				userDto.setFollowingCount(follows.size());
+			}
+			//***OBTENER FOLLOWERS
+			List<FollowDto> followers = new ArrayList<FollowDto>();
+			followService.getFollowers(userDto.getId()).forEach(followers::add);
+			if(followers.isEmpty()) {
+				userDto.setFollowersDto(new ArrayList<FollowDto>());
+				userDto.setFollowersCount(0);
+			}else {
+				userDto.setFollowersDto(followers);
+				userDto.setFollowersCount(followers.size());
+			}
 			return new ResponseDetails<UserDto>("OK",new Date(),new ResponseEntity<UserDto>(userDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
