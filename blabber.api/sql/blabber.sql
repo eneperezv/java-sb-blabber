@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2024 a las 05:49:21
+-- Tiempo de generación: 07-11-2024 a las 01:26:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -89,7 +89,9 @@ CREATE TABLE `dbo_users` (
 
 INSERT INTO `dbo_users` (`id_user`, `name`, `password`, `role`, `username`, `email`) VALUES
 (1, 'Eliezer Navarro P.', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'enp', 'eneperezv@gmail.com'),
-(2, 'Rayme Velandia', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'ray', 'raymevg@gmail.com');
+(2, 'Rayme Velandia', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'ray', 'raymevg@gmail.com'),
+(3, 'Gladys Perez', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'cocoperez', 'cocoperez@gmail.com'),
+(4, 'Daniela Sanchez', '$2a$10$DRtD6u4iWycTIrKGcrYuTOITp0JZq88lClhTIgzJ3YMvzlB7LnWOG', 'USER', 'nelasp', 'nelasp@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -112,7 +114,8 @@ CREATE TABLE `direct_messages` (
 
 INSERT INTO `direct_messages` (`id`, `content`, `is_read`, `sent_at`, `receiver_id`, `sender_id`) VALUES
 (1, 'Este es un mensaje directo de preuba', b'0', '2024-11-03 10:28:00.000000', 2, 1),
-(2, 'Este es otro mensaje directo para probar las notificaciones', b'0', '2024-11-04 10:28:00.000000', 1, 2);
+(2, 'Este es otro mensaje directo para probar las notificaciones', b'0', '2024-11-04 10:28:00.000000', 1, 2),
+(3, 'Mensaje directo para probar la hora de las notificaciones', b'0', '2024-11-05 10:28:00.000000', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -126,6 +129,17 @@ CREATE TABLE `follows` (
   `followed_id` bigint(20) NOT NULL,
   `follower_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `follows`
+--
+
+INSERT INTO `follows` (`id`, `followed_at`, `followed_id`, `follower_id`) VALUES
+(1, '2024-11-05 19:11:00.010000', 1, 2),
+(2, '2024-11-05 19:11:00.010000', 1, 3),
+(3, '2024-11-05 19:11:00.010000', 1, 4),
+(4, '2024-11-05 19:11:00.010000', 2, 1),
+(5, '2024-11-05 19:11:00.010000', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -169,7 +183,8 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `created_at`, `is_read`, `message`, `user_id`) VALUES
-(1, '2024-11-05 04:40:57.000000', b'0', 'ray has sent you a direct message.', 1);
+(1, '2024-11-04 20:40:57.000000', b'0', 'ray has sent you a direct message.', 1),
+(2, '2024-11-05 00:06:28.000000', b'0', 'ray has sent you a direct message.', 1);
 
 --
 -- Índices para tablas volcadas
@@ -248,19 +263,19 @@ ALTER TABLE `dbo_blabs`
 -- AUTO_INCREMENT de la tabla `dbo_users`
 --
 ALTER TABLE `dbo_users`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `direct_messages`
 --
 ALTER TABLE `direct_messages`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `follows`
 --
 ALTER TABLE `follows`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `likes`
@@ -272,7 +287,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT de la tabla `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
