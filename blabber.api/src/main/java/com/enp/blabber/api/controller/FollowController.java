@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +42,9 @@ public class FollowController {
 		}
 	}
 	
-	@GetMapping("/get-follows-by-user/{userid}")
-	public ResponseDetails<?> getFollowsByUser(Long userId){
+	@GetMapping("/get-follows-by-user/{userId}")
+	public ResponseDetails<?> getFollowsByUser(@PathVariable Long userId){
+		System.out.println("HOLA-->getFollowsByUser("+userId+")");
 		List<FollowDto> listaFollows = new ArrayList<FollowDto>();
 		try {
 			followService.getFollows(userId).forEach(listaFollows::add);
@@ -57,8 +59,9 @@ public class FollowController {
 		}
 	}
 	
-	@GetMapping("/get-followers-by-user/{userid}")
-	public ResponseDetails<?> getFollowersByUser(Long userId){
+	@GetMapping("/get-followers-by-user/{userId}")
+	public ResponseDetails<?> getFollowersByUser(@PathVariable Long userId){
+		System.out.println("HOLA-->getFollowersByUser("+userId+")");
 		List<FollowDto> listaFollows = new ArrayList<FollowDto>();
 		try {
 			followService.getFollowers(userId).forEach(listaFollows::add);
