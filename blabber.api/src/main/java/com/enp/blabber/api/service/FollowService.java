@@ -91,4 +91,8 @@ public class FollowService {
 		return followsDto;
 	}
 
+	public FollowDto createFollow(FollowDto followDto) {
+		return buildDto(Optional.of(followRepository.save(buildEntity(followDto))));
+	}
+
 }
