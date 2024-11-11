@@ -2,12 +2,6 @@
 
 Blabber es una API RESTful creada con **Spring Boot** que replica funcionalidades de una red social tipo X (anteriormente Twitter). Permite a los usuarios publicar "Blabs", seguir a otros usuarios, dar "likes", comentar, enviar mensajes directos y recibir notificaciones sobre diversas interacciones.
 
-**Tabla de Contenidos**
-
-[TOCM]
-
-[TOC]
-
 ## 📋 Características
 
 - **Gestión de usuarios**: Registro, inicio de sesión y autenticación de usuarios.
