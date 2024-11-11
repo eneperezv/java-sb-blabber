@@ -38,11 +38,11 @@ public class FollowController {
 	private NotificationService notificationService;
 	
 	@Autowired
-	private DataUtils util;
+	private DataUtils dataUtils;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createFollow(@RequestBody FollowDto followDto) {
-		followDto.setFollowedAt(util.getTimeNow());
+		followDto.setFollowedAt(dataUtils.getTimeNow());
 		FollowDto savedFollowDto;
 		try{
 			savedFollowDto = followService.createFollow(followDto);
@@ -50,6 +50,8 @@ public class FollowController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Follow <"+savedFollowDto+"> not set.");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
+			dataUtils.setNotification(followDto.getFollowerDto().getId(),followDto.getFollowedDto().getId()," has started following you.");
+			/*
 			UserDto userSend = userService.findById(followDto.getFollowerDto().getId());
 			UserDto userRecieve = userService.findById(followDto.getFollowedDto().getId());
 			NotificationDto notification = new NotificationDto();
@@ -59,6 +61,7 @@ public class FollowController {
 			notification.setCreatedAt(util.getTimeNow());
 			notification.setRead(false);
 			notificationService.createNotification(notification);
+			*/
 			return new ResponseDetails<FollowDto>("OK",new Date(),new ResponseEntity<FollowDto>(savedFollowDto, HttpStatus.OK));
 		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());

@@ -38,6 +38,7 @@ import com.enp.blabber.api.model.ResponseDetails;
 import com.enp.blabber.api.service.BlabService;
 import com.enp.blabber.api.service.CommentService;
 import com.enp.blabber.api.service.LikeService;
+import com.enp.blabber.api.utils.DataUtils;
 
 @RestController
 @RequestMapping("/api/v1/blabber/blabs")
@@ -51,6 +52,9 @@ public class BlabController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private DataUtils dataUtils;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createBlab(@RequestBody BlabDto blabDto){
@@ -113,6 +117,7 @@ public class BlabController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Like <"+savedLikeDto+"> not registered");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_CREATED", HttpStatus.NOT_FOUND));
 			}
+			dataUtils.setNotification(likeDto.getUserDto().getId(),likeDto.getBlabDto().getUserDto().getId()," liked your blab.");
 			return new ResponseDetails<LikeDto>("OK",new Date(),new ResponseEntity<LikeDto>(savedLikeDto, HttpStatus.OK));
 		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
@@ -147,6 +152,7 @@ public class BlabController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Comment <"+savedCommentDto+"> not registered");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_CREATED", HttpStatus.NOT_FOUND));
 			}
+			dataUtils.setNotification(commentDto.getUserDto().getId(),commentDto.getBlabDto().getUserDto().getId()," commented your blab.");
 			return new ResponseDetails<CommentDto>("OK",new Date(),new ResponseEntity<CommentDto>(savedCommentDto, HttpStatus.OK));
 		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
