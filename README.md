@@ -30,13 +30,11 @@ Blabber es una API RESTful creada con **Spring Boot** que replica funcionalidade
 
 ### Configuración de la Base de Datos
 
-1. Crea una base de datos en MySQL:
+#### 1. Crea una base de datos en MySQL:
 
-   ```sql
-   CREATE DATABASE blabberdb;
+`CREATE DATABASE blabberdb;`
 
-
-2. Actualiza las credenciales en src/main/resources/application.properties:
+#### 2. Actualiza las credenciales en src/main/resources/application.properties:
 
 spring.datasource.url=jdbc:mysql://localhost:3306/blabberdb
 spring.datasource.username=your_username
