@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2024 a las 01:26:34
+-- Tiempo de generación: 11-11-2024 a las 22:38:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -129,17 +129,6 @@ CREATE TABLE `follows` (
   `followed_id` bigint(20) NOT NULL,
   `follower_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `follows`
---
-
-INSERT INTO `follows` (`id`, `followed_at`, `followed_id`, `follower_id`) VALUES
-(1, '2024-11-05 19:11:00.010000', 1, 2),
-(2, '2024-11-05 19:11:00.010000', 1, 3),
-(3, '2024-11-05 19:11:00.010000', 1, 4),
-(4, '2024-11-05 19:11:00.010000', 2, 1),
-(5, '2024-11-05 19:11:00.010000', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -275,7 +264,7 @@ ALTER TABLE `direct_messages`
 -- AUTO_INCREMENT de la tabla `follows`
 --
 ALTER TABLE `follows`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `likes`
