@@ -51,17 +51,6 @@ public class FollowController {
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
 			dataUtils.setNotification(followDto.getFollowerDto().getId(),followDto.getFollowedDto().getId()," has started following you.");
-			/*
-			UserDto userSend = userService.findById(followDto.getFollowerDto().getId());
-			UserDto userRecieve = userService.findById(followDto.getFollowedDto().getId());
-			NotificationDto notification = new NotificationDto();
-			notification.setId(null);
-			notification.setUserDto(userRecieve);
-			notification.setMessage(userSend.getUsername() + " has started following you.");
-			notification.setCreatedAt(util.getTimeNow());
-			notification.setRead(false);
-			notificationService.createNotification(notification);
-			*/
 			return new ResponseDetails<FollowDto>("OK",new Date(),new ResponseEntity<FollowDto>(savedFollowDto, HttpStatus.OK));
 		}catch(Exception e){
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());

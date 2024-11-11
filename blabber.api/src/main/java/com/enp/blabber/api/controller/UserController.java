@@ -64,7 +64,7 @@ public class UserController {
 	private FollowService followService;
 	
 	@Autowired
-	private DataUtils util;
+	private DataUtils dataUtils;
 	
 	@PostMapping("/create")
 	public ResponseDetails<?> createUser(@RequestBody UserDto userDto){
@@ -187,14 +187,7 @@ public class UserController {
 				ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.NOT_FOUND.toString(),"Direct Message <"+savedDmDto+"> not sent");
 				return new ResponseDetails<String>("ERROR",new Date(),new ResponseEntity<String>("NOT_FOUND", HttpStatus.NOT_FOUND));
 			}
-			UserDto userDto = userService.findById(dmDto.getSenderDto().getId());
-			NotificationDto notification = new NotificationDto();
-			notification.setId(null);
-			notification.setUserDto(dmDto.getReceiverDto());
-			notification.setMessage(userDto.getUsername() + " has sent you a direct message.");
-			notification.setCreatedAt(util.getTimeNow());
-			notification.setRead(false);
-			notificationService.createNotification(notification);
+			dataUtils.setNotification(dmDto.getSenderDto().getId(),dmDto.getReceiverDto().getId()," has sent you a direct message.");
 			return new ResponseDetails<DirectMessageDto>("OK",new Date(),new ResponseEntity<DirectMessageDto>(savedDmDto, HttpStatus.OK));
 		}catch(Exception e) {
 			ErrorDetails err = new ErrorDetails(new Date(),HttpStatus.INTERNAL_SERVER_ERROR.toString(),e.getMessage());
