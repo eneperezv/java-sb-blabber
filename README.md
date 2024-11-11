@@ -2,6 +2,12 @@
 
 Blabber es una API RESTful creada con **Spring Boot** que replica funcionalidades de una red social tipo X (anteriormente Twitter). Permite a los usuarios publicar "Blabs", seguir a otros usuarios, dar "likes", comentar, enviar mensajes directos y recibir notificaciones sobre diversas interacciones.
 
+**Tabla de Contenidos**
+
+[TOCM]
+
+[TOC]
+
 ## 📋 Características
 
 - **Gestión de usuarios**: Registro, inicio de sesión y autenticación de usuarios.
@@ -35,14 +41,14 @@ Blabber es una API RESTful creada con **Spring Boot** que replica funcionalidade
 `CREATE DATABASE blabberdb;`
 
 #### 2. Actualiza las credenciales en src/main/resources/application.properties:
-`
+```
 spring.datasource.url=jdbc:mysql://localhost:3306/blabberdb
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-`
+```
 
 #### 3. Ejecución
 
@@ -54,7 +60,7 @@ La API estará disponible en http://localhost:8080.
 
 
 ## 📁 Estructura del Proyecto
-`
+```
 src
 │
 ├── com.enp.blabber
@@ -100,32 +106,35 @@ src
 │
 └── resources
     └── application.properties   # Configuración de la aplicación
-`
+```
 
 ## 🔧 Endpoints Principales
 
-### Usuarios
-POST /api/users/register: Registrar un nuevo usuario.
-POST /api/users/login: Iniciar sesión.
-GET /api/users/{id}: Obtener el perfil de un usuario.
+| **Usuarios** | - | - |
+| ------------- | --- | --- |
+| `POST` | `/api/users/register` | Registrar un nuevo usuario. |
+| `POST` | `/api/users/login` | Iniciar sesión. |
+| `GET` | `/api/users/{id}` | Obtener el perfil de un usuario. |
 
-### Blabs
-POST /api/blabs: Crear un nuevo blab.
-GET /api/blabs/{id}: Obtener un blab por ID.
-POST /api/blabs/{blabId}/like: Dar "like" a un blab.
-POST /api/blabs/{blabId}/comment: Comentar en un blab.
+| **Blabs** | - | - |
+| ------------- | --- | --- |
+| `POST` | `/api/blabs` | Crear un nuevo blab. |
+| `GET` | `/api/blabs/{id}` | Obtener un blab por ID. |
+| `POST` | `/api/blabs/{blabId}/like` |  Dar "like" a un blab. |
+| `POST` | `/api/blabs/{blabId}/comment` | Comentar en un blab. |
 
-### Seguidores
-POST /api/follows/{userId}: Seguir a un usuario.
-DELETE /api/follows/{userId}: Dejar de seguir a un usuario.
+| **Seguidores** | - | - |
+| ------------- | --- | --- |
+| `POST` | `/api/follows/{userId}` | Seguir a un usuario. |
 
-### Notificaciones
-GET /api/notifications/{userId}: Obtener notificaciones de un usuario.
-PUT /api/notifications/{notificationId}/read: Marcar una notificación como leída.
+| **Notificaciones** | - | - |
+| ------------- | --- | --- |
+| `GET` | `/api/notifications/{userId}` | Obtener notificaciones de un usuario.|
 
-### Mensajes Directos
-POST /api/messages: Enviar un mensaje directo.
-GET /api/messages/{conversationId}: Obtener los mensajes de una conversación.
+| **Mensajes Directos** | - | - |
+| ------------- | --- | --- |
+| `POST` | `/api/messages` | Enviar un mensaje directo. |
+| `GET` | `/api/messages/{conversationId}` | Obtener los mensajes de una conversación. |
 
 
 ## 🛡️ Autenticación y Seguridad
@@ -148,4 +157,4 @@ Haz push a la rama (git push origin feature/nueva-funcionalidad).
 Abre un Pull Request.
 
 
-¡Gracias por usar Blabber! Con esta API, esperamos crear una experiencia de red social robusta y escalable para usuarios y desarrolladores 🚀.
+## 💙🧡 ¡Gracias por usar Blabber! Con esta API, esperamos crear una experiencia de red social robusta y escalable para usuarios y desarrolladores 🚀.
